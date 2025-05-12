@@ -14,10 +14,15 @@ const Header = () => {
                 <Welcome />         
             </div>
             <header className="bg-neutral-900">
-                <Container>
+                <Container> 
                     <div className="flex items-center justify-between max-md:justify-center max-md:flex-col min-h-32">
-                        <div className="max-md:my-4">
-                            <Link to="/"><img src="./logo.png" alt="ShopSimples" className="w-56" /></Link>
+                        <div className="max-md:my-4 max-md:flex max-md:items-center">
+                            <div>
+                                <Link to="/"><img src="./logo.png" alt="ShopSimples" className="w-56" /></Link>
+                            </div>
+                            <div className="hidden max-md:absolute max-md:flex top-6 right-6">
+                                <IconFavCart />
+                            </div>
                         </div>
                         <Search />
                         <div className="flex gap-3 max-md:hidden">
