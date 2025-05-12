@@ -1,20 +1,31 @@
+import { Link, useLocation } from "react-router-dom"
 import { useState } from "react";
+//icons
 import { BsJustify, BsX } from "react-icons/bs";
-import { Link } from "react-router-dom"
+//components
 import Welcome from "../Welcome";
 
 const Nav = () => {
 
     const [menuOpen, setMenuOpen] = useState(false);
-    
+    const { pathname } = useLocation();
+
+     const navItems = [
+        { label: "Início", to: "/" },
+        { label: "Sobre", to: "/about" },
+        { label: "Produtos", to: "/products" },
+        { label: "Ofertas", to: "/offers" },
+        { label: "Contato", to: "/contact" },
+    ];
+
     return (
         <nav> 
             <ul className="grid grid-cols-5 gap-2 text-center text-white max-md:hidden">
-                <li className="bg-neutral-950/20 py-2 border border-neutral-950/60"><Link to='/'>Inicio</Link></li>
-                <li className="bg-neutral-950/20 py-2 border border-neutral-950/60"><Link to='/about'>Sobre</Link></li>
-                <li className="bg-neutral-950/20 py-2 border border-neutral-950/60"><Link to='/products'>Produtos</Link></li>
-                <li className="bg-neutral-950/20 py-2 border border-neutral-950/60"><Link to='/offers'>Ofertas</Link></li>
-                <li className="bg-neutral-950/20 py-2 border border-neutral-950/60"><Link to='/contact'>Contato</Link></li>
+                {navItems.map(({ label, to }) => (
+                    <li key={to} className={`py-2 border cursor-pointer border-neutral-950/60 rounded transition ${pathname === to ? "bg-pink-900 text-white" : "bg-neutral-950/20 hover:bg-pink-900 hover:text-white"}`}>
+                        <Link to={to} className="block w-full h-full">{label}</Link>
+                    </li>
+                ))}
             </ul>
 
             <div className='md:hidden absolute top-5 left-3'>
@@ -37,11 +48,11 @@ const Nav = () => {
                 
                 <div className="mt-3 px-3">
                     <ul className="grid grid-rows-5 gap-1 text-white">
-                        <li><Link to='/'>Inicio</Link></li>
-                        <li><Link to='/about'>Sobre</Link></li>
-                        <li><Link to='/products'>Produtos</Link></li>
-                        <li><Link to='/offers'>Ofertas</Link></li>
-                        <li><Link to='/contact'>Contato</Link></li>
+                        {navItems.map(({ label, to }) => (
+                            <li key={to} className={`py-2 cursor-pointer transition ${pathname === to ? "text-pink-900" : "hover:text-pink-900"}`}>
+                                <Link to={to} className="block w-full h-full">{label}</Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

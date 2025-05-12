@@ -1,3 +1,4 @@
+//icons
 import { BsSearch } from "react-icons/bs"
 
 const Search = () => {

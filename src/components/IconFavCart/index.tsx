@@ -1,3 +1,4 @@
+//icons
 import { BsCart2, BsHeart } from "react-icons/bs"
 
 const IconFavCart = () => {
