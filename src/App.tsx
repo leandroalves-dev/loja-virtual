@@ -15,9 +15,12 @@ import Register from './pages/Auth/Register'
 import ForgotPassword from './pages/Auth/ForgotPassword'
 import Category from './pages/Category';
 import ProductDetails from './pages/ProductDetails';
+import { FavoritesProvider } from './context/FavoritesContext';
+import Favorites from './pages/Favorites';
 
 function App() {
     return (
+    <FavoritesProvider>
         <div className='min-h-screen flex flex-col'>
             <BrowserRouter>
                 <Header />
@@ -33,11 +36,13 @@ function App() {
                         <Route path='/forgot-password' element={<ForgotPassword />}></Route>
                         <Route path='/category/:category' element={<Category />} />
                         <Route path='/product/:id' element={<ProductDetails />} />
+                        <Route path="/favorites" element={<Favorites />} />
                     </Routes>
                 </main>
                 <Footer />
             </BrowserRouter>
-        </div>
+            </div>
+        </FavoritesProvider>
     )
 }
 

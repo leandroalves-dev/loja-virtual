@@ -5,18 +5,27 @@ import Container from "../../components/Container";
 import Quantity from "../../components/Quantity";
 import { useState } from "react";
 import Button from "../../components/Button";
-import { BsHeart, BsTagFill } from "react-icons/bs";
+import { BsHeart, BsHeartFill, BsTagFill } from "react-icons/bs";
+
+import { useFavorites } from "../../context/FavoritesContext";
 
 const ProductDetails = () => {
 
     const { id } = useParams()
     const { products, loading } = useFetchProducts();
     const [quantity, setQuantity] = useState(1);
+    const { toggleFavorite, isFavorite } = useFavorites();
 
     const product = products.find(item => item.id === Number(id))
 
     if(loading) return <Loading />
     if(!product) return <p className="text-white">Produto não encontrado!</p>
+
+   const handleFavorite = () => {
+        if (product) {
+            toggleFavorite(product);
+        }
+    };
 
     return (
         <Container>
@@ -28,7 +37,13 @@ const ProductDetails = () => {
                     <div className="bg-neutral-950/20 p-4 mb-6">
                         <div className="flex justify-between items-center">
                             <h1 className="text-white text-2xl">{product.title}</h1>
-                            <BsHeart color="#FFF" />
+                            <div className="cursor-pointer" onClick={handleFavorite}>
+                                {isFavorite(product.id) ? (
+                                    <BsHeartFill color="red" /> 
+                                ) : (
+                                    <BsHeart color="#FFF" />
+                                )}
+                            </div>
                         </div>
                         <div className="my-4">
                             <h3 className="text-white mb-1">Descrição do produto</h3>

@@ -3,6 +3,7 @@ import { useState } from "react"
 import { BsCart2, BsHeart } from "react-icons/bs"
 // components
 import Minicart from "../MiniCart"
+import { Link } from "react-router-dom"
 
 const IconFavCart = () => {
 
@@ -11,7 +12,9 @@ const IconFavCart = () => {
     return (
         <div className="relative flex gap-4 items-center max-md:gap-0">
             <div className="cursor-pointer text-white hover:text-white/30 transition ease-in-out delay-100 max-md:mr-3">
-                <BsHeart size={24} />
+                <Link to='/favorites'>
+                    <BsHeart size={24} />
+                </Link>
             </div>
 
             <div className="cursor-pointer text-white hover:text-white/30 transition ease-in-out delay-100" onClick={() => setIsCartOpen(!isCartOpen)}>
