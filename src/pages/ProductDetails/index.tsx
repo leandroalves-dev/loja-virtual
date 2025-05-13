@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useFetchProducts } from "../../hooks/useFetchProducts";
 import Loading from "../../components/Loading";
 import Container from "../../components/Container";
@@ -66,7 +66,7 @@ const ProductDetails = () => {
                         <ul className="flex gap-2">
                             {product.tags.map((tag, index) => (
                                 <li key={index} className="flex gap-1 items-center bg-pink-800 text-white rounded p-1 px-2">
-                                    <BsTagFill /> {tag}
+                                    <BsTagFill /> <Link to={`/tags/${tag}`}>{tag}</Link>
                                 </li>
                             ))}
                         </ul>

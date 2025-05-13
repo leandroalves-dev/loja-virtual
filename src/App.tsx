@@ -17,6 +17,7 @@ import Category from './pages/Category';
 import ProductDetails from './pages/ProductDetails';
 import { FavoritesProvider } from './context/FavoritesContext';
 import Favorites from './pages/Favorites';
+import Tags from './pages/Tags';
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                         <Route path='/category/:category' element={<Category />} />
                         <Route path='/product/:id' element={<ProductDetails />} />
                         <Route path="/favorites" element={<Favorites />} />
+                        <Route path="/tags/:tags" element={<Tags />} />
                     </Routes>
                 </main>
                 <Footer />
