@@ -6,8 +6,9 @@ import Quantity from "../../components/Quantity";
 import { useState } from "react";
 import Button from "../../components/Button";
 import { BsHeart, BsHeartFill, BsTagFill } from "react-icons/bs";
-
 import { useFavorites } from "../../context/FavoritesContext";
+import MessageSuccess from "../../components/MessageSuccess";
+import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
 
 const ProductDetails = () => {
 
@@ -15,16 +16,28 @@ const ProductDetails = () => {
     const { products, loading } = useFetchProducts();
     const [quantity, setQuantity] = useState(1);
     const { toggleFavorite, isFavorite } = useFavorites();
+    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const [messageType, setMessageType] = useState<'success' | 'warning' | 'error'>('success');
 
     const product = products.find(item => item.id === Number(id))
 
     if(loading) return <Loading />
     if(!product) return <p className="text-white">Produto não encontrado!</p>
 
-   const handleFavorite = () => {
-        if (product) {
-            toggleFavorite(product);
-        }
+    const handleFavorite = () => {
+
+        if (!product) return;
+
+        const isFav = isFavorite(product.id);
+        toggleFavorite(product);
+
+        if (isFav) {
+            setSuccess('Favorito removido com sucesso!')
+            setMessageType('warning');
+        }else{
+            setSuccess('Favorito adicionado com sucesso!')
+            setMessageType('success');
+        }  
     };
 
     return (
@@ -39,7 +52,7 @@ const ProductDetails = () => {
                             <h1 className="text-white text-2xl">{product.title}</h1>
                             <div className="cursor-pointer" onClick={handleFavorite}>
                                 {isFavorite(product.id) ? (
-                                    <BsHeartFill color="red" /> 
+                                    <BsHeartFill color="red" />
                                 ) : (
                                     <BsHeart color="#FFF" />
                                 )}
@@ -59,13 +72,15 @@ const ProductDetails = () => {
                         <Button title="Adicionar ao carrinho" />
                     </div>
 
+                    {success && <MessageSuccess message={success} type={messageType} />}
+
                     <div className='border-y-1 border-neutral-800 my-6'></div>
 
                     <div className="bg-neutral-950/20 p-4">
                         <h3 className="text-white mb-1">Tags:</h3>
                         <ul className="flex gap-2">
                             {product.tags.map((tag, index) => (
-                                <li key={index} className="flex gap-1 items-center bg-pink-800 text-white rounded p-1 px-2">
+                                <li key={index} className="flex gap-1 items-center bg-pink-800 text-sm hover:bg-pink-800/50 transition-all ease-in-out delay-100 text-white rounded p-1 px-2">
                                     <BsTagFill /> <Link to={`/tags/${tag}`}>{tag}</Link>
                                 </li>
                             ))}

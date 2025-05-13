@@ -39,7 +39,7 @@ const Nav = () => {
             {/*MENU MOBILE*/}
             <div className={`fixed top-0 right-0 w-64 h-full bg-neutral-950 z-99  transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
                 <button className="absolute top-2 right-2 text-white cursor-pointer" onClick={() => setMenuOpen(false)}>
-                        <BsX size={30} />
+                   <BsX size={30} />
                 </button>  
 
                 <div className="py-2 bg-pink-900 text-white text-sm">
@@ -47,7 +47,7 @@ const Nav = () => {
                 </div>                
                 
                 <div className="mt-3 px-3">
-                    <ul className="grid grid-rows-5 gap-1 text-white">
+                    <ul className="grid grid-rows-5 gap-1 text-white" onClick={() => setMenuOpen(false)}>
                         {navItems.map(({ label, to }) => (
                             <li key={to} className={`py-2 cursor-pointer transition ${pathname === to ? "text-pink-900" : "hover:text-pink-900"}`}>
                                 <Link to={to} className="block w-full h-full">{label}</Link>

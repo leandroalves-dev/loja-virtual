@@ -12,7 +12,7 @@ const Favorites = () => {
                 {favorites.length === 0 ? (
                     <p>Você ainda não tem produtos favoritados.</p>
                 ) : (
-                    <ul className="grid grid-cols-2 gap-4">
+                    <ul className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
                         {favorites.map((item) => (
                             <Link to={`/product/${item.id}`}>
                                 <li key={item.id} className="bg-neutral-800 p-4 rounded hover:opacity-70 transition-all ease-in-out delay-100">
