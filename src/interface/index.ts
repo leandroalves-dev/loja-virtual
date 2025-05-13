@@ -2,7 +2,8 @@ export interface Products{
     id: number;
     title: string;
     description: string;
-    emphasis: boolean;
+    category: string;
+    emphasis: boolean
     qtda: number;
     price: number;
     tags: string[];

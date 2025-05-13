@@ -13,6 +13,7 @@ import Contact from './pages/Contact'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import ForgotPassword from './pages/Auth/ForgotPassword'
+import Category from './pages/Category';
 
 function App() {
     return (
@@ -26,10 +27,10 @@ function App() {
                         <Route path='/products' element={<Products />}></Route>
                         <Route path='/offers' element={<Offers />}></Route>
                         <Route path='/contact' element={<Contact />}></Route>
-
                         <Route path='/login' element={<Login />}></Route>
                         <Route path='/register' element={<Register />}></Route>
                         <Route path='/forgot-password' element={<ForgotPassword />}></Route>
+                        <Route path='/category/:category' element={<Category />} />
                     </Routes>
                 </main>
                 <Footer />

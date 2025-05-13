@@ -1,46 +1,21 @@
-
-
-import { useEffect, useState } from "react"
-import type { Products } from "../../interface";
-import Api from "../../api/axios";
 import { Link } from "react-router-dom";
 import { renderStars } from "../../utils/renderStars";
 import Loading from "../Loading";
+import { useFetchProducts } from "../../hooks/useFetchProducts";
 
 const ProductList = () => {
 
-    const [products, setProducts] = useState<Products[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-
-        const fetchProducts = async() => {
-            try {
-
-                const response = await Api.get('/product-loja.json')
-                setProducts(response.data);
-                console.log('Produtos: ', response.data)
-                
-            } catch (error) {
-                console.log('Erro ao buscar os produtos', error);
-            } finally{
-                setLoading(false);
-            }
-        }
-
-        fetchProducts()
-
-    },[])
+    const { products, loading } = useFetchProducts();
 
     const destaques = products.filter(item => item.emphasis === true);
 
     return (
-        <div className="mt-10">
+        <div>
             {loading && <Loading />}
             <h2 className="text-white mb-6 text-2xl">Nossos Produtos</h2>
             <div className="grid grid-cols-4 gap-3 max-md:grid-cols-3 max-sm:grid-cols-2">
                 {destaques.map(product => (
-                    <div key={product.id} className="mb-10">
+                    <div key={product.id}>
                         <Link to={`/product/${product.id}`}>
                             <img src={product.imagem} alt={product.title} className="bg-neutral-700 p-0.5" />
                         </Link>
@@ -51,7 +26,6 @@ const ProductList = () => {
                         </div>
                     </div>
                 ))}
-                
             </div>
         </div>
     )

@@ -1,4 +1,5 @@
 
+import CategoryList from "../../components/CategoryList"
 import Container from "../../components/Container"
 import ProductList from "../../components/ProductList"
 import SlideHome from "../../components/SlideHome"
@@ -8,6 +9,7 @@ const Home = () => {
         <>
             <SlideHome />
             <Container>
+                <CategoryList />
                 <ProductList />
             </Container>
         </>
