@@ -3,7 +3,7 @@ import { useFetchProducts } from "../../hooks/useFetchProducts";
 import Loading from "../../components/Loading";
 import Container from "../../components/Container";
 import Quantity from "../../components/Quantity";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../../components/Button";
 import { BsHeart, BsHeartFill, BsTagFill } from "react-icons/bs";
 import { useFavorites } from "../../context/FavoritesContext";
@@ -11,6 +11,7 @@ import MessageSuccess from "../../components/MessageSuccess";
 import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
 import { renderStars } from "../../utils/renderStars";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import Comments from "../../components/Comments";
 
 const ProductDetails = () => {
 
@@ -18,6 +19,7 @@ const ProductDetails = () => {
     const { products, loading } = useFetchProducts();
     const [quantity, setQuantity] = useState(1);
     const { toggleFavorite, isFavorite } = useFavorites();
+    const commentsRef = useRef<HTMLDivElement>(null);
     const { message: success, setMessage: setSuccess } = useAutoClearMessage()
     const [messageType, setMessageType] = useState<'success' | 'warning' | 'error'>('success');
 
@@ -42,6 +44,10 @@ const ProductDetails = () => {
         }  
     };
 
+    const scrollToComments = () => {
+        commentsRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
     return (
         <Container>
             <Breadcrumbs items={[
@@ -64,7 +70,11 @@ const ProductDetails = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="flex gap-1">{renderStars(product.rating)}</div>
+
+                        <div className="flex gap-1 text-white text-sm cursor-pointer hover:underline" onClick={scrollToComments}>
+                            {renderStars(product.rating)}(3)
+                        </div>
+
                         <div className="my-4">
                             <h3 className="text-white mb-1">Descrição do produto</h3>
                             <p className="text-neutral-700 text-sm">{product.description}</p>
@@ -96,8 +106,8 @@ const ProductDetails = () => {
                 </div>
             </div>
 
-            <div>
-                 <h2>COMENTÁRIOS</h2>
+            <div ref={commentsRef}>
+                <Comments />
             </div>
            
         </Container>
