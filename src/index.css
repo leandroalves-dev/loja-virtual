@@ -26,3 +26,26 @@
   scrollbar-width: thin;
   scrollbar-color: #888 #0f0f0f;
 }
+
+.slick-slider .slick-dots{
+    bottom: auto;
+    z-index: 9999;
+    position: relative;
+}
+
+.slick-slider .slick-dots li{
+    margin: 0;
+}
+
+.slick-slider .slick-dots li button:before{
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    color: #000;
+    opacity: 1;
+}
+
+.slick-slider .slick-dots li:hover button:before,
+.slick-slider .slick-dots li.slick-active button:before{
+     color: #FFF;
+}
