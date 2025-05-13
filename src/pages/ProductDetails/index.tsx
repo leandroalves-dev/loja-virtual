@@ -9,6 +9,8 @@ import { BsHeart, BsHeartFill, BsTagFill } from "react-icons/bs";
 import { useFavorites } from "../../context/FavoritesContext";
 import MessageSuccess from "../../components/MessageSuccess";
 import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
+import { renderStars } from "../../utils/renderStars";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 const ProductDetails = () => {
 
@@ -42,7 +44,11 @@ const ProductDetails = () => {
 
     return (
         <Container>
-            <div className="flex gap-6 items-start mt-10 max-md:flex-col">
+            <Breadcrumbs items={[
+                { label: 'Produtos', to: '/products' },
+                { label: product.title }
+            ]} />
+            <div className="flex gap-6 items-start my-10 max-md:flex-col border-y border-neutral-800 py-4">
                 <div className="bg-neutral-950/20 border-4 border-pink-800 w-2/3 max-md:w-full">
                     <img src={product.imagem} alt={product.title} className="object-cover w-full h-[450px]" />
                 </div>
@@ -58,6 +64,7 @@ const ProductDetails = () => {
                                 )}
                             </div>
                         </div>
+                        <div className="flex gap-1">{renderStars(product.rating)}</div>
                         <div className="my-4">
                             <h3 className="text-white mb-1">Descrição do produto</h3>
                             <p className="text-neutral-700 text-sm">{product.description}</p>
@@ -87,6 +94,10 @@ const ProductDetails = () => {
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div>
+                 <h2>COMENTÁRIOS</h2>
             </div>
            
         </Container>

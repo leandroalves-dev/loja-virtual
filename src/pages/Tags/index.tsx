@@ -8,6 +8,7 @@ import { renderStars } from "../../utils/renderStars"
 //components
 import Loading from "../../components/Loading"
 import Container from "../../components/Container"
+import Breadcrumbs from "../../components/Breadcrumbs"
 
 const Tags = () => {
 
@@ -22,7 +23,11 @@ const Tags = () => {
 
     return (
         <Container>
-            <div className="mt-10">
+            <Breadcrumbs items={[
+                { label: 'Produtos', to: '/products' },
+                { label: tags ?? 'Tags' }
+            ]} />
+            <div className="my-10">
                 {loading && <Loading />}
                 <div className={`flex items-center gap-1 mb-6`}>
                     <BsFillBookmarkFill size={18} /> 

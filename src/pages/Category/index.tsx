@@ -8,6 +8,7 @@ import { renderStars } from "../../utils/renderStars"
 //components
 import Loading from "../../components/Loading"
 import Container from "../../components/Container"
+import Breadcrumbs from "../../components/Breadcrumbs"
 
 const Category = () => {
 
@@ -18,9 +19,13 @@ const Category = () => {
 
     return (
         <Container>
-            <div className="mt-10">
+            <div>
                 {loading && <Loading />}
-                <div className={`flex items-center gap-1 mb-6 ${category === 'alimento' ? 'text-green-800' : category === 'higiene' ? 'text-blue-800' : 'text-yellow-400'}`}>
+                <Breadcrumbs items={[
+                    { label: 'Categoria', to: '/products' },
+                    { label: category ?? 'Categoria' }
+                ]} />
+                <div className={`flex items-center gap-1 my-10 ${category === 'alimento' ? 'text-green-800' : category === 'higiene' ? 'text-blue-800' : 'text-yellow-400'}`}>
                     <BsFillBookmarkFill size={18} /> 
                     <h2 className="text-white capitalize">{category}</h2>
                 </div>
