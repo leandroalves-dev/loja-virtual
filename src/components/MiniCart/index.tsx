@@ -2,12 +2,17 @@
 import { BsTrash, BsX } from "react-icons/bs";
 //components
 import Button from "../Button";
+import Quantity from "../Quantity";
+import { useState } from "react";
 
 interface MiniCartProps{
     setIsCartOpen: (open: boolean) => void
 }
 
 const Minicart = ({ setIsCartOpen }: MiniCartProps) => {
+
+    const [quantity, setQuantity] = useState(1);
+
     return (
         <div className="min-h-screen flex flex-col">
             <header className="flex items-center justify-between p-4">
@@ -45,11 +50,7 @@ const Minicart = ({ setIsCartOpen }: MiniCartProps) => {
                             <div className="text-white">
                                 <h2 className="mb-1 text-sm">Titulo do produto</h2>
                                 <p className="text-[10px]">R$ 100,00</p>
-                                <div className=" mt-2 flex justify-between items-center w-20">
-                                    <button className="bg-pink-950 px-2 cursor-pointer">-</button> 
-                                    <span className="text-sm">0</span>
-                                    <button className="bg-pink-950 px-2 cursor-pointer">+</button>
-                                </div>
+                                <Quantity quantity={quantity} onIncrease={() => setQuantity(q => q + 1)} onDecrease={() => setQuantity(q => (q > 1 ? q - 1 : 1))} />
                             </div>
                         </div>
                         <div>
@@ -65,11 +66,7 @@ const Minicart = ({ setIsCartOpen }: MiniCartProps) => {
                             <div className="text-white">
                                 <h2 className="mb-1 text-sm">Titulo do produto</h2>
                                 <p className="text-[10px]">R$ 100,00</p>
-                                <div className=" mt-2 flex justify-between items-center w-20">
-                                    <button className="bg-pink-950 px-2 cursor-pointer">-</button> 
-                                    <span className="text-sm">0</span>
-                                    <button className="bg-pink-950 px-2 cursor-pointer">+</button>
-                                </div>
+                                <Quantity quantity={quantity} onIncrease={() => setQuantity(q => q + 1)} onDecrease={() => setQuantity(q => (q > 1 ? q - 1 : 1))} />
                             </div>
                         </div>
                         <div>

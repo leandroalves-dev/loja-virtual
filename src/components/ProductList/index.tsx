@@ -12,7 +12,7 @@ const ProductList = () => {
     return (
         <div>
             {loading && <Loading />}
-            <h2 className="text-white mb-6 text-2xl">Nossos Produtos</h2>
+            <h2 className="text-white mb-6 text-2xl">Produtos em Destaques</h2>
             <div className="grid grid-cols-4 gap-3 max-md:grid-cols-3 max-sm:grid-cols-2">
                 {destaques.map(product => (
                     <div key={product.id}>

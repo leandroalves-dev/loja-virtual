@@ -14,6 +14,7 @@ import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import ForgotPassword from './pages/Auth/ForgotPassword'
 import Category from './pages/Category';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                         <Route path='/register' element={<Register />}></Route>
                         <Route path='/forgot-password' element={<ForgotPassword />}></Route>
                         <Route path='/category/:category' element={<Category />} />
+                        <Route path='/product/:id' element={<ProductDetails />} />
                     </Routes>
                 </main>
                 <Footer />

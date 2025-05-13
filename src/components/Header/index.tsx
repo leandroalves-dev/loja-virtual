@@ -18,7 +18,7 @@ const Header = () => {
                     <div className="flex items-center justify-between max-md:justify-center max-md:flex-col min-h-32">
                         <div className="max-md:my-4 max-md:flex max-md:items-center">
                             <div>
-                                <Link to="/"><img src="./logo.png" alt="ShopSimples" className="w-56" /></Link>
+                                <Link to="/"><img src="/logo.png" alt="ShopSimples" className="w-56" /></Link>
                             </div>
                             <div className="hidden max-md:absolute max-md:flex top-6 right-6">
                                 <IconFavCart />
