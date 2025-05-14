@@ -74,13 +74,7 @@ const Minicart = ({ setIsCartOpen }: MiniCartProps) => {
                         </div>
                     </div>
                 </div>
-                <div className="p-4 flex flex-col">
-                    <label className="text-white mb-1">Calcular frete:</label>
-                    <div className="flex gap-2">
-                        <input type="text" className="bg-neutral-950/30 border w-full border-neutral-950/60 focus:outline-none py-1 placeholder:text-white/30 px-2 text-sm text-white/30" placeholder="Digite o cep..." />
-                        <button className="bg-neutral-950/30 border w-full border-neutral-950/60 py-1 px-2 text-white text-sm cursor-pointer">Calcular</button>
-                    </div>
-                </div>
+                
                 <div className="p-4 text-white">
                     <div className="flex justify-between items-center">
                         <span>Subtotal:</span>

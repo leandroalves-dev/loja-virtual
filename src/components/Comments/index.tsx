@@ -22,6 +22,7 @@ const Comments = () => {
     };
 
     const onsubmit = (data: FormData) => {
+        reset();
         console.log(data);
     }
 
@@ -135,7 +136,7 @@ const Comments = () => {
                     </div>
                 </div>
             </div>
-            <div ref={commentsRef} className="mt-10">
+            <div ref={commentsRef} className="mt-10 w-2xl">
                 <h1 className="text-white text-2xl mb-2">Deixe seu comentário:</h1>
                 <form onSubmit={handleSubmit(onsubmit)}>
                     <Input
@@ -145,7 +146,7 @@ const Comments = () => {
                         register={register('name')}
                         error={errors.name?.message}    
                     />
-                    <div>
+                    <div className="mb-2">
                         <label className="text-white mb-1 block">Mensagem</label>
                         <textarea {...register('message')} className="p-2.5 rounded text-sm placeholder:text-white/30 border border-white/10 w-full text-white focus:outline-none">
                         </textarea>

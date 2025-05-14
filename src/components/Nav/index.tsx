@@ -14,7 +14,7 @@ const Nav = () => {
         { label: "Início", to: "/" },
         { label: "Sobre", to: "/about" },
         { label: "Produtos", to: "/products" },
-        { label: "Ofertas", to: "/offers" },
+        { label: "Ofertas", to: "/sale" },
         { label: "Contato", to: "/contact" },
     ];
 

@@ -7,7 +7,7 @@ const MessageSuccess = ({ message, type = 'success' }: MessageSuccessProps) => {
     const colorClasses = {
         success: 'text-green-300',
         warning: 'text-yellow-300',
-        error: 'text-red-300',
+        error: 'text-red-400',
     };
 
     return (

@@ -8,7 +8,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import About from './pages/About'
 import Products from './pages/Products'
-import Offers from './pages/Offers'
+import Sale from './pages/Sale'
 import Contact from './pages/Contact'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
@@ -30,7 +30,7 @@ function App() {
                         <Route path='/' element={<Home />}></Route>
                         <Route path='/about' element={<About />}></Route>
                         <Route path='/products' element={<Products />}></Route>
-                        <Route path='/offers' element={<Offers />}></Route>
+                        <Route path='/sale' element={<Sale />}></Route>
                         <Route path='/contact' element={<Contact />}></Route>
                         <Route path='/login' element={<Login />}></Route>
                         <Route path='/register' element={<Register />}></Route>

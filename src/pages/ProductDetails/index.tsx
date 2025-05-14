@@ -12,6 +12,7 @@ import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
 import { renderStars } from "../../utils/renderStars";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Comments from "../../components/Comments";
+import Cep from "../../components/Cep";
 
 const ProductDetails = () => {
 
@@ -59,7 +60,7 @@ const ProductDetails = () => {
                     <img src={product.imagem} alt={product.title} className="object-cover w-full h-[450px]" />
                 </div>
                 <div className=" w-1/2 self-start max-md:w-full">
-                    <div className="bg-neutral-950/20 p-4 mb-6">
+                    <div className="bg-neutral-950/20 p-4 mb-4">
                         <div className="flex justify-between items-center">
                             <h1 className="text-white text-2xl">{product.title}</h1>
                             <div className="cursor-pointer" onClick={handleFavorite}>
@@ -91,19 +92,21 @@ const ProductDetails = () => {
 
                     {success && <MessageSuccess message={success} type={messageType} />}
 
-                    <div className='border-y-1 border-neutral-800 my-6'></div>
+                    <div className='border-y-1 border-neutral-800 my-4'></div>
 
-                    <div className="bg-neutral-950/20 p-4">
-                        <h3 className="text-white mb-1">Tags:</h3>
-                        <ul className="flex gap-2">
-                            {product.tags.map((tag, index) => (
-                                <li key={index} className="flex gap-1 items-center bg-pink-800 text-sm hover:bg-pink-800/50 transition-all ease-in-out delay-100 text-white rounded p-1 px-2">
-                                    <BsTagFill /> <Link to={`/tags/${tag}`}>{tag}</Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <Cep />
                 </div>
+            </div>
+
+            <div className="bg-neutral-950/20 p-4 mb-10">
+                <h3 className="text-white mb-1">Tags:</h3>
+                <ul className="flex gap-2">
+                    {product.tags.map((tag, index) => (
+                        <li key={index} className="flex gap-1 items-center bg-pink-800 text-sm hover:bg-pink-800/50 transition-all ease-in-out delay-100 text-white rounded p-1 px-2">
+                            <BsTagFill /> <Link to={`/tags/${tag}`}>{tag}</Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
 
             <div ref={commentsRef}>
