@@ -55,7 +55,7 @@ const Login = () => {
                     </div>
                     {success && <MessageSuccess message={success} />}
                     <div>
-                        <Button title="Logar" />
+                        <Button title="Logar" className="px-6" />
                     </div>
                 </form>
             </div>
