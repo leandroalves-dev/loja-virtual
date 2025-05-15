@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -8,7 +9,15 @@ import { useAutoClearMessage } from "../../hooks/useAutoClearMessage"
 import MessageSuccess from "../../components/MessageSuccess"
 import Container from "../../components/Container"
 import Input from "../../components/Input"
-import Button from "../../components/Button"
+import Button from "../../components/Button";
+//firebase
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { auth, db } from "../../config/firebaseConfig"
+import { doc, setDoc } from "firebase/firestore"
+import { useState } from "react"
+import Loading from "../../components/Loading"
+import { useAuth } from "../../context/AuthContext"
+
 
 const schema = z.object({
     name: z.string().min(1, 'Preencha o nome'),
@@ -31,15 +40,70 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const Register = () => {
-
+    
+    const navigate = useNavigate();
     const { register, handleSubmit, setError, setValue, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
     const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const [ loading, setLoading ] = useState(false);
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
-        reset()
-        setSuccess("Cadastro realizado com sucesso!");
+    const { setUser } = useAuth(); // já que você expôs no contexto
+    
+    const onSubmit = async (data: FormData) => {
+        setLoading(true);
+
+        try {
+            // 1. Criar o usuário no Authentication
+            const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            const user = userCredential.user;
+
+            await updateProfile(user, {
+                displayName: data.name,
+            });
+
+            await user.reload(); // atualiza o usuário com o novo nome
+
+            // Isso força nova referência para que o React atualize
+            setUser({ ...auth.currentUser! });
+
+            console.log('Nome atualizado:', auth.currentUser?.displayName);
+            
+            // 3. Salvar dados adicionais no Firestore
+            await setDoc(doc(db, "users", user.uid), {
+                uid: user.uid,
+                name: data.name,
+                lastname: data.lastname,
+                dateBirth: data.dateBirth,
+                cpf: data.cpf,
+                email: data.email,
+                phone: data.phone,
+                cep: data.cep,
+                address: data.address,
+                neighborhood: data.neighborhood,
+                estado: data.estado,
+                localidade: data.localidade,
+                n: data.n,
+                complement: data.complement || '',
+                ref: data.ref || '',
+                createdAt: new Date(),
+                role: 'user', // Defina o papel do usuário aqui (admin/user/etc)
+            });
+
+            setSuccess("Usuário registrado com sucesso!");
+            reset();
+            navigate("/");
+
+        } catch (error: any) {
+            console.error("Erro ao registrar:", error);
+            if (error.code === "auth/email-already-in-use") {
+                setError("email", { message: "E-mail já está em uso" });
+            } else {
+                alert("Erro ao registrar. Tente novamente.");
+            }
+        } finally {
+            setLoading(false);
+        }
     };
+
 
     const getAddress = async (cep: string) => {
         const cepLimpo = cep.replace(/\D/g, "");
@@ -68,6 +132,7 @@ const Register = () => {
     return (
         <Container>
             <div className="mt-6 mx-auto mb-10">
+                {loading && <Loading />}
                 <header>
                     <h1 className="text-white text-lg">Complete seu cadastro para continuar</h1>
                     <p className="text-neutral-600 text-sm">Preencha as informações abaixo com atenção. Elas são essenciais para processarmos seu pedido com segurança.</p>
@@ -212,9 +277,11 @@ const Register = () => {
                         </div>
                     </div>
                 </form>
+                
             </div>
         </Container>
     )
 }
 
 export default Register
+

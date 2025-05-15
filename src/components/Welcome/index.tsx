@@ -3,20 +3,23 @@ import { Link } from "react-router-dom"
 import { BsPersonFill, BsPersonFillLock } from "react-icons/bs"
 //components
 import Container from "../Container"
+import { useAuth } from "../../context/AuthContext"
+import { FiLogOut } from "react-icons/fi"
 
-const index = () => {
+const Welcome = () => {
 
-    const user = ''
-    //const user = 'Administrador'
+    const { user, loading, logout  } = useAuth();
+
+    if (loading) return null;
 
     return (
         <Container>
             <div className="flex items-center justify-end max-md:justify-start max-md:mt-1"> 
                 {user ? (
-                    <ul className="flex gap-3 max-md:flex-col max-md:gap-1">
-                        <li className="max-md:pr-15">Olá {user}, sejá bem vindo!</li>
+                    <ul className="flex items-center gap-3 max-md:flex-col max-md:gap-1">
+                        <li className="max-md:pr-15">Olá {user?.displayName ?? 'usuário'}, seja bem-vindo!</li>
                         <li className="text-white/30 max-md:hidden">|</li>
-                        <li className="cursor-pointer">Sair</li>
+                        <li className="cursor-pointer" onClick={logout}><FiLogOut /></li>
                     </ul>
                 ):(
                     <ul className="flex gap-3 max-md:flex-col max-md:gap-1">
@@ -32,4 +35,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Welcome
