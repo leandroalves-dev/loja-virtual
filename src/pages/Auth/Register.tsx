@@ -18,7 +18,6 @@ import { useState } from "react"
 import Loading from "../../components/Loading"
 import { useAuth } from "../../context/AuthContext"
 
-
 const schema = z.object({
     name: z.string().min(1, 'Preencha o nome'),
     lastname: z.string().min(1, 'Preencha o sobrenome'),
@@ -46,25 +45,27 @@ const Register = () => {
     const { message: success, setMessage: setSuccess } = useAutoClearMessage()
     const [ loading, setLoading ] = useState(false);
 
-    const { setUser } = useAuth(); // já que você expôs no contexto
+    const { setUser } = useAuth(); 
     
     const onSubmit = async (data: FormData) => {
-        setLoading(true);
-
+        
         try {
+            
+            setLoading(true);
+            
             // 1. Criar o usuário no Authentication
             const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
             const user = userCredential.user;
-
+            
             await updateProfile(user, {
                 displayName: data.name,
             });
-
+            
             await user.reload(); // atualiza o usuário com o novo nome
-
+            
             // Isso força nova referência para que o React atualize
             setUser({ ...auth.currentUser! });
-
+            
             console.log('Nome atualizado:', auth.currentUser?.displayName);
             
             // 3. Salvar dados adicionais no Firestore
@@ -85,11 +86,15 @@ const Register = () => {
                 complement: data.complement || '',
                 ref: data.ref || '',
                 createdAt: new Date(),
-                role: 'user', // Defina o papel do usuário aqui (admin/user/etc)
+                role: 'user', 
             });
-
-            setSuccess("Usuário registrado com sucesso!");
+            
+            
             reset();
+            setLoading(false);
+            setSuccess("Usuário registrado com sucesso!");
+            
+            await new Promise(resolve => setTimeout(resolve, 1500));
             navigate("/");
 
         } catch (error: any) {

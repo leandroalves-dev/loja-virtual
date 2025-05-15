@@ -1,7 +1,13 @@
-import { Link } from "react-router-dom"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+//firebase
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from "../../config/firebaseConfig"
+import { useAuth } from "../../context/AuthContext"
+import { useState } from "react"
 //hoooks
 import { useAutoClearMessage } from "../../hooks/useAutoClearMessage"
 //components
@@ -9,6 +15,7 @@ import Container from "../../components/Container"
 import Input from "../../components/Input"
 import MessageSuccess from "../../components/MessageSuccess"
 import Button from "../../components/Button"
+import Loading from "../../components/Loading"
 
 const schema = z.object({
     email: z.string().email('E-mail invalido'),
@@ -19,17 +26,41 @@ type FormData = z.infer<typeof schema>
 
 const Login = () => {
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
-    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const navigate = useNavigate();
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
-        reset()
-        setSuccess("Login realizado com sucesso!");
+    const { register, handleSubmit, setError, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
+    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const { setUser } = useAuth()
+    const [ loading, setLoading ] = useState(false);
+
+    const onSubmit = async(data: FormData) => {
+        try {
+            setLoading(true);
+            
+            const dadosLogin = await signInWithEmailAndPassword(auth, data.email, data.password);
+            setUser(dadosLogin.user)
+            reset();
+
+            setLoading(false);
+            setSuccess('Login realizado com sucesso!')
+                      
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            navigate('/')
+      
+        } catch (error : any) {
+            console.error("Erro ao registrar:", error);
+            const firebaseError = error?.code || error?.message;
+            if (firebaseError === "auth/user-not-found" ||firebaseError === "auth/wrong-password" || firebaseError === "auth/invalid-credential" || firebaseError === "INVALID_LOGIN_CREDENTIALS"){
+                setError("password", { message: "E-mail ou senha incorretos." });
+            } else {
+                setError("password", { message: "Erro ao tentar logar. Tente novamente." });
+            }
+        }
     };
     
     return (
         <Container>
+            {loading && <Loading /> }
             <div className="mt-6 max-w-[400px] mx-auto mb-10">
                 <header>
                     <h1 className="text-white text-lg">Logar com os dados abaixo</h1>
