@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -10,12 +11,12 @@ import MessageSuccess from "../../components/MessageSuccess"
 import Container from "../../components/Container"
 import Input from "../../components/Input"
 import Button from "../../components/Button";
+import Loading from "../../components/Loading"
 //firebase
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { auth, db } from "../../config/firebaseConfig"
 import { doc, setDoc } from "firebase/firestore"
-import { useState } from "react"
-import Loading from "../../components/Loading"
+//context
 import { useAuth } from "../../context/AuthContext"
 
 const schema = z.object({

@@ -19,6 +19,8 @@ const Welcome = () => {
                     <ul className="flex items-center gap-3 max-md:flex-col max-md:gap-1">
                         <li className="max-md:pr-15">Olá {user?.displayName ?? 'usuário'}, seja bem-vindo!</li>
                         <li className="text-white/30 max-md:hidden">|</li>
+                        <li><Link to='/edit-profile'>Perfil</Link></li>
+                        <li className="text-white/30 max-md:hidden">|</li>
                         <li className="cursor-pointer" onClick={logout}><FiLogOut /></li>
                     </ul>
                 ):(

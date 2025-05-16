@@ -19,6 +19,8 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import Favorites from './pages/Favorites';
 import Tags from './pages/Tags';
 import { AuthProvider } from './context/AuthContext';
+import EditProfile from './pages/EditProfile';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
     return (
@@ -41,6 +43,7 @@ function App() {
                             <Route path='/product/:id' element={<ProductDetails />} />
                             <Route path="/favorites" element={<Favorites />} />
                             <Route path="/tags/:tags" element={<Tags />} />
+                            <Route path="edit-profile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
                         </Routes>
                     </main>
                     <Footer />

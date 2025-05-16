@@ -14,14 +14,25 @@ export interface Products{
 }
 
 export interface Cep{
+    address: string;
     cep: string;
     logradouro: string;
-    complemento: string;
-    bairro: string;
+    complement: string;
+    cpf: string; 
+    neighborhood: string;
     localidade: string;
+    dateBirth: string;
+    email: string;
+    name: string;
+    lastname: string;
+    estado: string;
+    n: string;
     uf: string;
     ibge: string;
     gia: string;
+    phone: string;
     ddd: string;
     siafi: string;
+    ref?: string;
+    imagem?: string;
 }

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -6,8 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 //firebase
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../../config/firebaseConfig"
+//context
 import { useAuth } from "../../context/AuthContext"
-import { useState } from "react"
 //hoooks
 import { useAutoClearMessage } from "../../hooks/useAutoClearMessage"
 //components
@@ -50,7 +51,7 @@ const Login = () => {
         } catch (error : any) {
             console.error("Erro ao registrar:", error);
             const firebaseError = error?.code || error?.message;
-            if (firebaseError === "auth/user-not-found" ||firebaseError === "auth/wrong-password" || firebaseError === "auth/invalid-credential" || firebaseError === "INVALID_LOGIN_CREDENTIALS"){
+            if (firebaseError === "auth/user-not-found" || firebaseError === "auth/wrong-password" || firebaseError === "auth/invalid-credential" || firebaseError === "INVALID_LOGIN_CREDENTIALS"){
                 setError("password", { message: "E-mail ou senha incorretos." });
             } else {
                 setError("password", { message: "Erro ao tentar logar. Tente novamente." });
