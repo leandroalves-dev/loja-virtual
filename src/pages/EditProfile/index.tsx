@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom"
 
 const EditProfile = () => {
 
-    const { user } = useAuth()
+    const { user, setUserData } = useAuth()
     const { register, handleSubmit, setError, reset, watch, formState: { errors } } = useForm<Cep>();
     const [imagemUrl, setImagemUrl] = useState<string>("");
     const [loading, setLoading] = useState(false);
@@ -41,7 +41,7 @@ const EditProfile = () => {
         const fetchUser = async() => {
 
             if (!user) {
-                setLoading(false); // Garante que o loading pare se user for null
+                setLoading(false); 
                 return;
             }
 
@@ -116,6 +116,12 @@ const EditProfile = () => {
                 imagem: data.imagem
             });
 
+            setUserData({
+                displayName: user?.displayName || "", 
+                name: data.name,
+                lastname: data.lastname,
+                imagem: data.imagem || ""
+            });
             setSuccess("Perfil atualizado com sucesso!");
         } catch (error) {
             console.error("Erro ao atualizar:", error);

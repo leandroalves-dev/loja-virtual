@@ -5,19 +5,26 @@ import { BsPersonFill, BsPersonFillLock } from "react-icons/bs"
 import Container from "../Container"
 import { useAuth } from "../../context/AuthContext"
 import { FiLogOut } from "react-icons/fi"
+import { useEffect } from "react"
 
 const Welcome = () => {
 
-    const { user, loading, logout  } = useAuth();
+    const { userData, logout  } = useAuth();
+    const defaultImage = "https://i.pinimg.com/236x/a8/da/22/a8da222be70a71e7858bf752065d5cc3.jpg"; 
+     
+    useEffect(() => {
+        //console.log("Welcome: userData mudou:", userData);
+    }, [userData]);
 
-    if (loading) return null;
+    if (!userData) return null;
 
     return (
         <Container>
             <div className="flex items-center justify-end max-md:justify-start max-md:mt-1"> 
-                {user ? (
+                {userData ? (
                     <ul className="flex items-center gap-3 max-md:flex-col max-md:gap-1">
-                        <li className="max-md:pr-15">Olá {user?.displayName ?? 'usuário'}, seja bem-vindo!</li>
+                        <li><img src={userData.imagem || defaultImage} className="w-7 rounded-full" /></li>
+                        <li className="max-md:pr-15">{userData.name ?? 'usuário'}, seja bem-vindo!</li>
                         <li className="text-white/30 max-md:hidden">|</li>
                         <li><Link to='/edit-profile'>Perfil</Link></li>
                         <li className="text-white/30 max-md:hidden">|</li>
