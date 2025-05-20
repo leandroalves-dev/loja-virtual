@@ -19,12 +19,12 @@ type FormData = z.infer<typeof schema>
 const ForgotPassword = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
-    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const { feedback, setFeedback } = useAutoClearMessage();
 
     const onSubmit = (data: FormData) => {
         console.log(data);
         reset()
-        setSuccess("Um e-mail foi enviado para esse endereço, basta você clicar no link e recuperar sua senha.");
+        setFeedback({ message: "Um e-mail foi enviado para esse endereço, basta você clicar no link e recuperar sua senha.", type: 'success'});
     };
 
     return (
@@ -41,7 +41,7 @@ const ForgotPassword = () => {
                         register={register("email")}
                         error={errors.email?.message}
                     />
-                    {success && <MessageSuccess message={success} />}
+                    {feedback && <MessageSuccess type={feedback.type} message={feedback.message} />}
                     <div>
                         <Button title="Recuperar" />
                     </div>

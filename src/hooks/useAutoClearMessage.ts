@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react"
 
+type MessageType = 'success' | 'warning' | 'error'
+
+interface Feedback {
+    message: string
+    type: MessageType
+}
+
 export function useAutoClearMessage(timeout = 3000) {
-    const [message, setMessage] = useState("")
+    const [feedback, setFeedback] = useState<Feedback | null>(null)
 
     useEffect(() => {
-        if (message) {
-            const timer = setTimeout(() => setMessage(""), timeout)
-            return () => clearTimeout(timer)
+        if (feedback) {
+        const timer = setTimeout(() => setFeedback(null), timeout)
+        return () => clearTimeout(timer)
         }
-    }, [message, timeout])
+    }, [feedback, timeout])
 
-    return { message, setMessage }
+    return { feedback, setFeedback }
 }

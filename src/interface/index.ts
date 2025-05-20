@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 export interface Products{
     id: number;
     title: string;
@@ -35,4 +37,14 @@ export interface Cep{
     siafi: string;
     ref?: string;
     imagem?: string;
+}
+export interface ListComments{
+    id: string;
+    name: string;
+    message: string;
+    rating: number;
+    imagem?: string;
+    createdAt: Timestamp;
+    userId: string;
+    productId: number
 }

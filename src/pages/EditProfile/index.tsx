@@ -22,7 +22,7 @@ const EditProfile = () => {
     const { register, handleSubmit, setError, reset, watch, formState: { errors } } = useForm<Cep>();
     const [imagemUrl, setImagemUrl] = useState<string>("");
     const [loading, setLoading] = useState(false);
-    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const { feedback, setFeedback } = useAutoClearMessage();
     const navigate = useNavigate();
 
     const imagemWatch = watch("imagem");
@@ -122,7 +122,7 @@ const EditProfile = () => {
                 lastname: data.lastname,
                 imagem: data.imagem || ""
             });
-            setSuccess("Perfil atualizado com sucesso!");
+            setFeedback({ message: "Perfil atualizado com sucesso!", type: 'success'});
         } catch (error) {
             console.error("Erro ao atualizar:", error);
             setError('email', {message: 'Erro ao atualizar o perfil.'});
@@ -270,7 +270,7 @@ const EditProfile = () => {
                     <div>
                         <Button title="Editar Perfil" />
                     </div>
-                    {success && <MessageSuccess type="success" message={success} />}
+                    {feedback && <MessageSuccess type={feedback.type} message={feedback.message} />}
                 </form>
             </div>
         </Container>

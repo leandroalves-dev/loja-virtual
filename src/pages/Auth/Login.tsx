@@ -30,7 +30,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const { register, handleSubmit, setError, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
-    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const { feedback, setFeedback } = useAutoClearMessage();
     const { setUser } = useAuth()
     const [ loading, setLoading ] = useState(false);
 
@@ -43,7 +43,7 @@ const Login = () => {
             reset();
 
             setLoading(false);
-            setSuccess('Login realizado com sucesso!')
+            setFeedback({ message: 'Login realizado com sucesso!', type: 'success' })
                       
             await new Promise(resolve => setTimeout(resolve, 1500));
             navigate('/')
@@ -85,7 +85,7 @@ const Login = () => {
                         <p>Não tem conta? <Link to='/register'>clique aqui</Link></p>
                         <p><Link to='/forgot-password'>Esqueceu a senha?</Link></p>
                     </div>
-                    {success && <MessageSuccess message={success} />}
+                    {feedback && <MessageSuccess type={feedback.type} message={feedback.message} />}
                     <div>
                         <Button title="Logar" className="px-6" />
                     </div>

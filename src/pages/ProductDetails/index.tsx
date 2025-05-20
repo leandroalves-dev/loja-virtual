@@ -1,47 +1,77 @@
 import { Link, useParams } from "react-router-dom"
+import { useEffect, useRef, useState } from "react";
+//icons
+import { BsHeart, BsHeartFill, BsTagFill } from "react-icons/bs";
+//firebase
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+//config
+import { db } from "../../config/firebaseConfig";
+//hooks
 import { useFetchProducts } from "../../hooks/useFetchProducts";
+import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
+//components
 import Loading from "../../components/Loading";
 import Container from "../../components/Container";
 import Quantity from "../../components/Quantity";
-import { useRef, useState } from "react";
 import Button from "../../components/Button";
-import { BsHeart, BsHeartFill, BsTagFill } from "react-icons/bs";
-import { useFavorites } from "../../context/FavoritesContext";
 import MessageSuccess from "../../components/MessageSuccess";
-import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
-import { renderStars } from "../../utils/renderStars";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import Comments from "../../components/Comments";
 import Cep from "../../components/Cep";
+import Comments from "../../components/Comments";
+//context
+import { useFavorites } from "../../context/FavoritesContext";
+import { renderStars } from "../../utils/renderStars";
+//interface
+import type { ListComments } from "../../interface";
 
 const ProductDetails = () => {
 
     const { id } = useParams()
+    const { feedback, setFeedback } = useAutoClearMessage();
     const { products, loading } = useFetchProducts();
-    const [quantity, setQuantity] = useState(1);
     const { toggleFavorite, isFavorite } = useFavorites();
+    const [quantity, setQuantity] = useState(1);
     const commentsRef = useRef<HTMLDivElement>(null);
-    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
-    const [messageType, setMessageType] = useState<'success' | 'warning' | 'error'>('success');
+
+    const [comments, setComments] = useState<ListComments[]>([]);
+    const [rating, setRating] = useState(0);
 
     const product = products.find(item => item.id === Number(id))
 
-    if(loading) return <Loading />
-    if(!product) return <p className="text-white">Produto não encontrado!</p>
+    useEffect(() => {
+        if (!product) return;
+
+        const q = query(collection(db, "comments"), where("productId", "==", product.id));
+
+        const getComments = onSnapshot(q, (snapshot) => {
+            const data = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...(doc.data() as Omit<ListComments, 'id'>)
+            }));
+
+            setComments(data);
+
+            if (data.length > 0) {
+                const media = data.reduce((acc, c) => acc + c.rating, 0) / data.length;
+                setRating(media);
+            } else {
+                setRating(0);
+            }
+        });
+
+        return () => getComments();
+    }, [product]);
 
     const handleFavorite = () => {
-
         if (!product) return;
 
         const isFav = isFavorite(product.id);
         toggleFavorite(product);
 
         if (isFav) {
-            setSuccess('Favorito removido com sucesso!')
-            setMessageType('warning');
+            setFeedback({ message: 'Favorito removido com sucesso!', type: 'warning'})
         }else{
-            setSuccess('Favorito adicionado com sucesso!')
-            setMessageType('success');
+            setFeedback({ message: 'Favorito adicionado com sucesso!', type: 'success'})
         }  
     };
 
@@ -49,12 +79,12 @@ const ProductDetails = () => {
         commentsRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
+    if(loading) return <Loading />
+    if(!product) return <p className="text-white">Produto não encontrado!</p>
+
     return (
         <Container>
-            <Breadcrumbs items={[
-                { label: 'Produtos', to: '/products' },
-                { label: product.title }
-            ]} />
+            <Breadcrumbs items={[ { label: 'Produtos', to: '/products' }, { label: product.title } ]} />
             <div className="flex gap-6 items-start my-10 max-md:flex-col border-y border-neutral-800 py-4">
                 <div className="bg-neutral-950/20 border-4 border-pink-800 w-2/3 max-md:w-full">
                     <img src={product.imagem} alt={product.title} className="object-cover w-full h-[450px]" />
@@ -73,7 +103,7 @@ const ProductDetails = () => {
                         </div>
 
                         <div className="flex gap-1 text-white text-sm cursor-pointer hover:underline" onClick={scrollToComments}>
-                            {renderStars(product.rating)}(3)
+                            {renderStars(Math.round(rating))} ({comments.length})
                         </div>
 
                         <div className="my-4">
@@ -90,7 +120,7 @@ const ProductDetails = () => {
                         <Button title="Adicionar ao carrinho" />
                     </div>
 
-                    {success && <MessageSuccess message={success} type={messageType} />}
+                    {feedback && <MessageSuccess type={feedback.type} message={feedback.message} />}
 
                     <div className='border-y-1 border-neutral-800 my-4'></div>
 
@@ -110,7 +140,7 @@ const ProductDetails = () => {
             </div>
 
             <div ref={commentsRef}>
-                <Comments />
+                <Comments productId={product.id} />
             </div>
            
         </Container>

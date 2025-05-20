@@ -22,8 +22,8 @@ const Input = ({ label, type, placeholder, className, register, error, onBlur }:
                 } p-2.5 rounded text-sm placeholder:text-white/30 text-white focus:outline-none ${className ?? ""}`}
                 {...register}
                 onBlur={(e) => {
-                    register.onBlur?.(e); // mantém o comportamento do RHF
-                    onBlur?.(e); // chama o seu callback se vier
+                    register.onBlur?.(e);
+                    onBlur?.(e); 
                 }}
             />
             {error && <span className="text-pink-500 text-xs mt-1">{error}</span>}

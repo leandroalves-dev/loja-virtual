@@ -9,19 +9,18 @@ import { useEffect } from "react"
 
 const Welcome = () => {
 
-    const { userData, logout  } = useAuth();
+    const { user, userData, logout } = useAuth();
     const defaultImage = "https://i.pinimg.com/236x/a8/da/22/a8da222be70a71e7858bf752065d5cc3.jpg"; 
      
     useEffect(() => {
-        //console.log("Welcome: userData mudou:", userData);
+        console.log("Welcome: userData mudou:", userData);
     }, [userData]);
-
-    if (!userData) return null;
+   
 
     return (
         <Container>
             <div className="flex items-center justify-end max-md:justify-start max-md:mt-1"> 
-                {userData ? (
+                {user && userData ? (
                     <ul className="flex items-center gap-3 max-md:flex-col max-md:gap-1">
                         <li><img src={userData.imagem || defaultImage} className="w-7 rounded-full" /></li>
                         <li className="max-md:pr-15">{userData.name ?? 'usuário'}, seja bem-vindo!</li>

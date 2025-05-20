@@ -43,7 +43,7 @@ const Register = () => {
     
     const navigate = useNavigate();
     const { register, handleSubmit, setError, setValue, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
-    const { message: success, setMessage: setSuccess } = useAutoClearMessage()
+    const { feedback, setFeedback } = useAutoClearMessage();
     const [ loading, setLoading ] = useState(false);
 
     const { setUser } = useAuth(); 
@@ -93,7 +93,7 @@ const Register = () => {
             
             reset();
             setLoading(false);
-            setSuccess("Usuário registrado com sucesso!");
+            setFeedback({ message: "Usuário registrado com sucesso!", type: 'success' });
             
             await new Promise(resolve => setTimeout(resolve, 1500));
             navigate("/");
@@ -276,7 +276,7 @@ const Register = () => {
                                 <p>Já tem conta? <Link to='/login'>clique aqui</Link></p>
                                 <p><Link to='/forgot-password'>Esqueceu a senha?</Link></p>
                             </div>
-                            {success && <MessageSuccess message={success} />}
+                            {feedback && <MessageSuccess type={feedback.type} message={feedback.message} />}
                             <div>
                                 <Button title="Registrar" />
                             </div>

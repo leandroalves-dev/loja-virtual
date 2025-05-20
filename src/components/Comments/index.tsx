@@ -1,30 +1,81 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { BsStar, BsStarFill } from "react-icons/bs"
 import Input from "../Input";
 import Button from "../Button";
+import { addDoc, collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { db } from "../../config/firebaseConfig";
+import MessageSuccess from "../MessageSuccess";
+import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
+import Loading from "../Loading";
+import { useAuth } from "../../context/AuthContext"
+import type { ListComments } from "../../interface";
 
 const schema = z.object({
     name: z.string().min(1,'Preencha o campo nome'),
-    message: z.string().min(1, 'Preencha o campo de mensagem')
+    message: z.string().min(1, 'Preencha o campo de mensagem'),
 })
 
 type FormData = z.infer<typeof schema>
 
-const Comments = () => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
+const Comments = ({ productId }: { productId: number }) => {
     const commentsRef = useRef<HTMLDivElement>(null);
+    const { userData } = useAuth();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema)})
+    const [rating, setRating] = useState(0);
+    const [comments, setComments] = useState<ListComments[]>([])
+    const [loading, setLoading] = useState(true);
+    const defaultImage = "https://i.pinimg.com/236x/a8/da/22/a8da222be70a71e7858bf752065d5cc3.jpg"; 
+    const { feedback, setFeedback } = useAutoClearMessage();
 
     const scrollToComments = () => {
         commentsRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    const onsubmit = (data: FormData) => {
+    //Permite ver atulalização em tempo real
+    useEffect( () => {
+        
+        const commentsQuery = query(collection(db, 'comments'), where('productId', '==', productId), orderBy('createdAt','desc'))
+        const getComments = onSnapshot(commentsQuery, (comments) => {
+            const data: ListComments[] = comments.docs.map(comment => ({
+                 id: comment.id,
+                ...(comment.data() as Omit<ListComments, 'id'>)
+            }))
+
+            setComments(data)
+            setLoading(false)
+        })
+
+        return () => getComments()
+    },[])
+
+    const onsubmit = async (data: FormData) => {
+
+        if(rating === 0){
+            setFeedback({ message: 'Por favor, selecione uma nota com as estrelas!', type: 'warning' });
+            return
+        }
+
+        await addDoc(collection(db, 'comments'), {
+            name: data.name,
+            message: data.message,
+            rating: rating,
+            imagem: userData?.imagem ?? null,
+            createdAt: new Date(),
+            productId: productId
+        })
+        
         reset();
-        console.log(data);
+        setRating(0);
+        setFeedback({ message: 'Comentário criado com sucesso!', type: 'success' });
     }
+
+    if(comments.length > 0){
+        console.log('COMENTARIOS', comments)
+    }
+
 
     return (
         <div className="mb-10">
@@ -32,111 +83,39 @@ const Comments = () => {
                 <h2 className="text-white text-lg flex items-center gap-1"><BsStarFill /> Avaliação dos Clientes</h2>
                 <button className="bg-pink-800 py-1 px-2 text-white rounded cursor-pointer" onClick={scrollToComments}>Avaliar</button>
             </div>
-            <div className="mt-6 border-b border-neutral-800 pb-8">
-                <div className="flex gap-1 items-center mb-3 text-yellow-300">
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStar />
-                    <BsStar />
-                </div>
-                <div className="flex items-start gap-2 text-white">
-                    <div className="bg-blue-400 w-16 h-16 flex justify-center items-center text-3xl">R</div>
-                    <div className="flex flex-col text-sm">
-                        <div className="flex items-center gap-2 mb-2">
-                            <h2 className="font-bold">Ronaldo da silva</h2> 
-                            <span>-</span>
-                            <span className="text-neutral-500">13/05/2025 às 15:36</span>
-                        </div>
-                        <p>Comentário de teste 1</p>
-                    </div>
-                </div>
-            </div>
 
-            <div className="mt-6 border-b border-neutral-800 pb-8">
-                <div className="flex gap-1 items-center mb-3 text-yellow-300">
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStar />
-                    <BsStar />
-                </div>
-                <div className="flex items-start gap-2 text-white">
-                    <div className="bg-green-400 w-16 h-16 flex justify-center items-center text-3xl">A</div>
-                    <div className="flex flex-col text-sm">
-                        <div className="flex items-center gap-2 mb-2">
-                            <h2 className="font-bold">Ana Paula</h2> 
-                            <span>-</span>
-                            <span className="text-neutral-500">17/05/2025 às 20:16</span>
+            {loading ? (
+                <Loading />
+            ) : comments.length === 0 ? (
+                <h1 className="text-pink-800 text-md py-2">No momento não há nenhum comentário.</h1>
+            ) : (
+                comments.map(comment => (
+                    <div key={comment.id} className="mt-6 border-b border-neutral-800 pb-8">
+                        <div className="flex gap-1 items-center mb-3 text-yellow-300">
+                            {[1, 2, 3, 4, 5].map((star) =>
+                                comment.rating >= star ? <BsStarFill key={star} /> : <BsStar key={star} />
+                            )}
                         </div>
-                        <p>Comentário de teste 2</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className="mt-6 border-b border-neutral-800 pb-8">
-                <div className="flex gap-1 items-center mb-3 text-yellow-300">
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStar />
-                    <BsStar />
-                    <BsStar />
-                </div>
-                <div className="flex items-start gap-2 text-white">
-                    <div className="bg-orange-400 w-16 h-16 flex justify-center items-center text-3xl">G</div>
-                    <div className="flex flex-col text-sm">
-                        <div className="flex items-center gap-2 mb-2">
-                            <h2 className="font-bold">Gracielle</h2> 
-                            <span>-</span>
-                            <span className="text-neutral-500">22/05/2025 às 12:16</span>
+                        <div className="flex items-start gap-2 text-white">
+                            <div className="w-16 h-16 flex justify-center items-center">
+                                <img src={comment.imagem || defaultImage} />
+                            </div>
+                            <div className="flex flex-col text-sm">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <h2 className="font-bold">{comment.name}</h2> 
+                                    <span>-</span>
+                                    <span className="text-neutral-500">
+                                        {comment.createdAt?.toDate().toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'})} às
+                                        {comment.createdAt?.toDate().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                </div>
+                                <p>{comment.message}</p>
+                            </div>
                         </div>
-                        <p>Comentário de teste 4</p>
                     </div>
-                </div>
-            </div>
-
-            <div className="mt-6 border-b border-neutral-800 pb-8">
-                <div className="flex gap-1 items-center mb-3 text-yellow-300">
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                </div>
-                <div className="flex items-start gap-2 text-white">
-                    <div className="bg-amber-700 w-16 h-16 flex justify-center items-center text-3xl">C</div>
-                    <div className="flex flex-col text-sm">
-                        <div className="flex items-center gap-2 mb-2">
-                            <h2 className="font-bold">Carina</h2> 
-                            <span>-</span>
-                            <span className="text-neutral-500">26/05/2025 às 09:45</span>
-                        </div>
-                        <p>Comentário de teste 5</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className="mt-6">
-                <div className="flex gap-1 items-center mb-3 text-yellow-300">
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStar />
-                    <BsStar />
-                </div>
-                <div className="flex items-start gap-2 text-white">
-                    <div className="bg-red-400 w-16 h-16 flex justify-center items-center text-3xl">L</div>
-                    <div className="flex flex-col text-sm">
-                        <div className="flex items-center gap-2 mb-2">
-                            <h2 className="font-bold">Lucio Mauro</h2> 
-                            <span>-</span>
-                            <span className="text-neutral-500">19/05/2025 às 11:26</span>
-                        </div>
-                        <p>Comentário de teste 3</p>
-                    </div>
-                </div>
-            </div>
-            <div ref={commentsRef} className="mt-10 w-2xl">
+                ))
+            )}
+            <div ref={commentsRef} className="mt-10">
                 <h1 className="text-white text-2xl mb-2">Deixe seu comentário:</h1>
                 <form onSubmit={handleSubmit(onsubmit)}>
                     <Input
@@ -151,7 +130,15 @@ const Comments = () => {
                         <textarea {...register('message')} className="p-2.5 rounded text-sm placeholder:text-white/30 border border-white/10 w-full text-white focus:outline-none">
                         </textarea>
                     </div>
+                    <div className="flex gap-1 items-center mb-4">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <button type="button" key={star} onClick={() => setRating(star)} className="text-yellow-300 text-xl">
+                                {rating >= star ? <BsStarFill /> : <BsStar />}
+                            </button>
+                        ))}
+                    </div>
                     <Button title="Deixar comentário" />
+                    {feedback && <MessageSuccess type={feedback.type} message={feedback.message} />}
                 </form>
             </div>
         </div>
