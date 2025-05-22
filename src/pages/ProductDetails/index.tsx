@@ -23,10 +23,13 @@ import { useFavorites } from "../../context/FavoritesContext";
 import { renderStars } from "../../utils/renderStars";
 //interface
 import type { ListComments } from "../../interface";
+import { useCart } from "../../context/CartContext";
 
 const ProductDetails = () => {
 
     const { id } = useParams()
+    const { addToCart } = useCart();
+    
     const { feedback, setFeedback } = useAutoClearMessage();
     const { products, loading } = useFetchProducts();
     const { toggleFavorite, isFavorite } = useFavorites();
@@ -79,8 +82,23 @@ const ProductDetails = () => {
         commentsRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
+    const handleAddToCart = () => {
+        if(!product) return
+
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            imagem: product.imagem,
+            totalQuantity: product.qtda
+        }, quantity)
+        setFeedback({ message: 'Produto adicionado ao carrinho!', type: 'success' });
+    }
+
     if(loading) return <Loading />
     if(!product) return <p className="text-white">Produto não encontrado!</p>
+
+    console.log('QUANTITY', quantity)
 
     return (
         <Container>
@@ -117,7 +135,7 @@ const ProductDetails = () => {
                             <h3 className="text-white text-sm">Quantidade:</h3>
                             <Quantity quantity={quantity} onIncrease={() => setQuantity(q => q + 1)} onDecrease={() => setQuantity(q => (q > 1 ? q - 1 : 1))} />
                         </div>
-                        <Button title="Adicionar ao carrinho" />
+                        <Button title="Adicionar ao Carrinho" onClick={handleAddToCart} />
                     </div>
 
                     {feedback && <MessageSuccess type={feedback.type} message={feedback.message} />}
@@ -142,6 +160,7 @@ const ProductDetails = () => {
             <div ref={commentsRef}>
                 <Comments productId={product.id} />
             </div>
+            
            
         </Container>
     )

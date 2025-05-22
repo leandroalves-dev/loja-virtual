@@ -2,15 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+//icons
 import { BsStar, BsStarFill } from "react-icons/bs"
+//firebase
+import { addDoc, collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
+//config
+import { db } from "../../config/firebaseConfig";
+//components
 import Input from "../Input";
 import Button from "../Button";
-import { addDoc, collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { db } from "../../config/firebaseConfig";
-import MessageSuccess from "../MessageSuccess";
-import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
 import Loading from "../Loading";
+import MessageSuccess from "../MessageSuccess";
+//hooks
+import { useAutoClearMessage } from "../../hooks/useAutoClearMessage";
+//context
 import { useAuth } from "../../context/AuthContext"
+//interface
 import type { ListComments } from "../../interface";
 
 const schema = z.object({

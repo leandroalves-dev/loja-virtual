@@ -1,13 +1,13 @@
-import { useState } from "react"
 // icons
 import { BsCart2, BsHeart } from "react-icons/bs"
 // components
 import Minicart from "../MiniCart"
 import { Link } from "react-router-dom"
+import { useCart } from "../../context/CartContext"
 
 const IconFavCart = () => {
 
-    const [isCartOpen, setIsCartOpen] = useState(false)
+    const { isCartOpen, setIsCartOpen } = useCart();
 
     return (
         <div className="relative flex gap-4 items-center max-md:gap-0">

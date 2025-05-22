@@ -21,36 +21,43 @@ import Tags from './pages/Tags';
 import { AuthProvider } from './context/AuthContext';
 import EditProfile from './pages/EditProfile';
 import PrivateRoute from './components/PrivateRoute';
+import { CartProvider } from './context/CartContext';
 
 function App() {
     return (
-        <AuthProvider>
-            <FavoritesProvider>
-            <div className='min-h-screen flex flex-col'>
-                <BrowserRouter>
-                    <Header />
-                    <main className='bg-neutral-900 flex-1'>
-                        <Routes>
-                            <Route path='/' element={<Home />}></Route>
-                            <Route path='/about' element={<About />}></Route>
-                            <Route path='/products' element={<Products />}></Route>
-                            <Route path='/sale' element={<Sale />}></Route>
-                            <Route path='/contact' element={<Contact />}></Route>
-                            <Route path='/login' element={<Login />}></Route>
-                            <Route path='/register' element={<Register />}></Route>
-                            <Route path='/forgot-password' element={<ForgotPassword />}></Route>
-                            <Route path='/category/:category' element={<Category />} />
-                            <Route path='/product/:id' element={<ProductDetails />} />
-                            <Route path="/favorites" element={<Favorites />} />
-                            <Route path="/tags/:tags" element={<Tags />} />
-                            <Route path="edit-profile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
-                        </Routes>
-                    </main>
-                    <Footer />
-                </BrowserRouter>
-                </div>
-            </FavoritesProvider>
-        </AuthProvider>
+        <BrowserRouter>
+            <AuthProvider>
+                <CartProvider>
+                    <FavoritesProvider>
+                    
+                        <div className='min-h-screen flex flex-col'>
+                            
+                                <Header />
+                                <main className='bg-neutral-900 flex-1'>
+                                    <Routes>
+                                        <Route path='/' element={<Home />}></Route>
+                                        <Route path='/about' element={<About />}></Route>
+                                        <Route path='/products' element={<Products />}></Route>
+                                        <Route path='/sale' element={<Sale />}></Route>
+                                        <Route path='/contact' element={<Contact />}></Route>
+                                        <Route path='/login' element={<Login />}></Route>
+                                        <Route path='/register' element={<Register />}></Route>
+                                        <Route path='/forgot-password' element={<ForgotPassword />}></Route>
+                                        <Route path='/category/:category' element={<Category />} />
+                                        <Route path='/product/:id' element={<ProductDetails />} />
+                                        <Route path="/favorites" element={<Favorites />} />
+                                        <Route path="/tags/:tags" element={<Tags />} />
+                                        <Route path="edit-profile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+                                    </Routes>
+                                </main>
+                                <Footer />
+                            
+                        </div>
+                    
+                    </FavoritesProvider>
+                </CartProvider>
+            </AuthProvider>
+        </BrowserRouter>
         
     )
 }

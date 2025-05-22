@@ -48,3 +48,11 @@ export interface ListComments{
     userId: string;
     productId: number
 }
+export interface CartItem {
+    id: number;
+    title: string;
+    price: number;
+    imagem: string;
+    quantity: number;
+    totalQuantity: number
+}
