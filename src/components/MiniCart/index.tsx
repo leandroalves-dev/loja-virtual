@@ -4,14 +4,25 @@ import { BsTrash, BsX } from "react-icons/bs";
 import Button from "../Button";
 import Quantity from "../Quantity";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-interface MiniCartProps{
-    setIsCartOpen: (open: boolean) => void
-}
 
-const Minicart = ({ setIsCartOpen }: MiniCartProps) => {
+const Minicart = () => {
 
-    const { cart, removeFromCart, increaseQuantity, decreaseQuantity, totalQuantity, subTotalPrice, totalPrice  } = useCart()
+    const { user } = useAuth();
+    const { cart, removeFromCart, increaseQuantity, decreaseQuantity, totalQuantity, subTotalPrice, totalPrice, setIsCartOpen  } = useCart()
+    const navigate = useNavigate()
+
+    const handleCheckout = () => {
+        if(!user){
+            navigate('/login')
+            setIsCartOpen(false)
+        }else{
+            navigate('/checkout')
+            setIsCartOpen(false)
+        }
+    }
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -69,7 +80,7 @@ const Minicart = ({ setIsCartOpen }: MiniCartProps) => {
             </div>
             {cart.length !== 0 && (
                 <div className="flex justify-between items-center m-3 gap-2 text-white">
-                    <Button title="Finalizar compra" className="w-full text-sm" />
+                    <Button title="Finalizar compra" className="w-full text-sm" onClick={handleCheckout} />
                     <button className="py-2 bg-gray-800 px-2 w-full text-sm cursor-pointer rounded hover:opacity-80 transition ease-in-out delay-100">Cancelar compra</button>
                 </div>
             )}

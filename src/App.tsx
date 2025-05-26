@@ -22,6 +22,9 @@ import { AuthProvider } from './context/AuthContext';
 import EditProfile from './pages/EditProfile';
 import PrivateRoute from './components/PrivateRoute';
 import { CartProvider } from './context/CartContext';
+import Checkout from './components/Checkout';
+import OrderSuccess from './pages/OrderSuccess';
+import OrderHistory from './pages/OrderHistory';
 
 function App() {
     return (
@@ -47,7 +50,10 @@ function App() {
                                         <Route path='/product/:id' element={<ProductDetails />} />
                                         <Route path="/favorites" element={<Favorites />} />
                                         <Route path="/tags/:tags" element={<Tags />} />
-                                        <Route path="edit-profile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+                                        <Route path="/edit-profile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+                                        <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
+                                        <Route path="/order-success" element={<PrivateRoute><OrderSuccess /></PrivateRoute>} />
+                                        <Route path="/my-orders" element={<PrivateRoute><OrderHistory /></PrivateRoute>} />
                                     </Routes>
                                 </main>
                                 <Footer />

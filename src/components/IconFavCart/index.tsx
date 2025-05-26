@@ -22,7 +22,7 @@ const IconFavCart = () => {
             </div>
 
             <div className={`fixed top-0 right-0 h-full w-[350px] bg-neutral-900 border border-neutral-800/60 z-40 transform transition-transform duration-300 ease-in-out ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
-                <Minicart setIsCartOpen={setIsCartOpen} />
+                <Minicart  />
             </div>
         </div>
     )

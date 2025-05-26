@@ -27,6 +27,8 @@ const Welcome = () => {
                         <li className="text-white/30 max-md:hidden">|</li>
                         <li><Link to='/edit-profile'>Perfil</Link></li>
                         <li className="text-white/30 max-md:hidden">|</li>
+                        <li><Link to="/my-orders">Meus pedidos</Link></li>
+                        <li className="text-white/30 max-md:hidden">|</li>
                         <li className="cursor-pointer" onClick={logout}><FiLogOut /></li>
                     </ul>
                 ):(

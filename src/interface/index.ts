@@ -56,3 +56,17 @@ export interface CartItem {
     quantity: number;
     totalQuantity: number
 }
+
+export interface Order {
+    id: string;
+    name: string;
+    items: Array<{
+        id: string;
+        title: string;
+        price: number;
+        quantity: number;
+        imagem: string;
+    }>;
+    total: number;
+    createdAt: Timestamp;
+}
