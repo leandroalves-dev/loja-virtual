@@ -23,7 +23,7 @@ const Welcome = () => {
                 {user && userData ? (
                     <ul className="flex items-center gap-3 max-md:flex-col max-md:gap-2 max-md:items-start">
                         <li className="flex gap-3 items-center">
-                            <img src={userData.imagem || defaultImage} className="w-7 rounded-full" />
+                            <img src={userData.imagem || defaultImage} className="w-10 h-10 rounded-full object-cover" />
                             {userData.name ?? 'usuário'}, seja bem-vindo!
                         </li>
                         <li className="text-white/30 max-md:hidden">|</li>

@@ -36,7 +36,7 @@ function App() {
                         <div className='min-h-screen flex flex-col'>
                             
                                 <Header />
-                                <main className='bg-neutral-900 flex-1'>
+                                <main className='bg-neutral-900 flex-1 pb-12'>
                                     <Routes>
                                         <Route path='/' element={<Home />}></Route>
                                         <Route path='/about' element={<About />}></Route>
