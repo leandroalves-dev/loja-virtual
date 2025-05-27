@@ -39,7 +39,7 @@
     "tags": ["alimento", "óleo", "cozinha"],
     "rating": 4.6,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/oleo.jpg",
-    "discount": 2
+    "discount": 0
   },
   {
     "id": 4,
@@ -53,7 +53,7 @@
     "tags": ["alimento", "massa", "macarrão"],
     "rating": 4.5,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/macarrao.jpg",
-    "discount": 4
+    "discount": 0
   },
   {
     "id": 5,
@@ -67,7 +67,7 @@
     "tags": ["alimento", "farinha", "panificação"],
     "rating": 4.4,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/farinha.jpg",
-    "discount": 6
+    "discount": 0
   },
   {
     "id": 6,
@@ -81,7 +81,7 @@
     "tags": ["alimento", "açúcar", "doce"],
     "rating": 4.5,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/acucar.jpg",
-    "discount": 3
+    "discount": 0
   },
   {
     "id": 7,
@@ -95,21 +95,21 @@
     "tags": ["alimento", "sal", "tempero"],
     "rating": 4.6,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/sal.jpg",
-    "discount": 1
+    "discount": 0
   },
   {
     "id": 8,
     "title": "Café Torrado e Moído - 500g",
     "description": "Café de torra média com aroma marcante e sabor encorpado. Perfeito para começar o dia com energia.",
     "category": "alimento",
-    "emphasis": true,
+    "emphasis": false,
     "sale": false,
     "qtda": 70,
     "price": 12.99,
     "tags": ["alimento", "bebida", "café"],
     "rating": 3.3,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/cafe.jpg",
-    "discount": 5
+    "discount": 0
   },
   {
     "id": 9,
@@ -179,7 +179,7 @@
     "tags": ["bebida", "refrigerante", "cola"],
     "rating": 4.2,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/coca.jpg",
-    "discount": 1
+    "discount": 4
   },
   {
     "id": 14,
@@ -207,7 +207,7 @@
     "tags": ["bebida", "água", "mineral"],
     "rating": 4.8,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/agua.jpg",
-    "discount": 0
+    "discount": 6
   },
   {
     "id": 16,
@@ -221,7 +221,7 @@
     "tags": ["higiene", "sabonete", "pele"],
     "rating": 4.6,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/sabonete.jpg",
-    "discount": 3
+    "discount": 0
   },
   {
     "id": 17,
@@ -235,7 +235,7 @@
     "tags": ["higiene", "shampoo", "cabelos"],
     "rating": 4.4,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/shampoo.jpg",
-    "discount": 5
+    "discount": 0
   },
   {
     "id": 18,
@@ -256,27 +256,27 @@
     "title": "Papel Higiênico Folha Dupla - 4 un",
     "description": "Papel higiênico folha dupla, macio e resistente. Embalagem com 4 unidades para uso diário com conforto.",
     "category": "higiene",
-    "emphasis": true,
+    "emphasis": false,
     "sale": false,
     "qtda": 70,
     "price": 5.49,
     "tags": ["higiene", "papel", "banheiro"],
     "rating": 4.3,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/papel.jpg",
-    "discount": 2
+    "discount": 0
   },
   {
     "id": 20,
     "title": "Desinfetante Floral - 500ml",
     "description": "Desinfetante com fragrância floral que limpa, perfuma e elimina 99,9% dos germes e bactérias.",
     "category": "limpeza",
-    "emphasis": true,
+    "emphasis": false,
     "sale": false,
     "qtda": 60,
     "price": 4.29,
     "tags": ["limpeza", "desinfetante", "casa"],
     "rating": 4.7,
     "imagem": "https://leandroeffgen.com.br/projects/loja_virtual/imagens/desinfetante.jpg",
-    "discount": 3
+    "discount": 0
   }
 ]

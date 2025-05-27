@@ -25,6 +25,7 @@ import { CartProvider } from './context/CartContext';
 import Checkout from './components/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 import OrderHistory from './pages/OrderHistory';
+import ScrollToTop from './components/ScrollToTop';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                         <div className='min-h-screen flex flex-col'>
                             <Header />
                             <main className='bg-neutral-900 flex-1 pb-12'>
+                                <ScrollToTop />
                                 <Routes>
                                     <Route path='/' element={<Home />}></Route>
                                     <Route path='/about' element={<About />}></Route>
