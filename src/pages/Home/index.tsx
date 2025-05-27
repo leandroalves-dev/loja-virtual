@@ -11,9 +11,9 @@ const Home = () => {
             <SlideHome />
             <Container>
                 <CategoryList />
-                <ProductList />
-                <FeedbacksClients />
+                <ProductList />                
             </Container>
+            <FeedbacksClients />
         </>
         
     )

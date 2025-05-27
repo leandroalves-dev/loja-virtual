@@ -37,7 +37,7 @@ const Footer = () => {
             <Container>
                 <div className="grid grid-cols-4 py-10 max-md:grid-cols-1 max-md:gap-5 max-md:text-center">
                     <div className="max-md:mx-auto">
-                        <img src="./logo.png" alt="ShopSimples" className="w-48 opacity-50" />
+                        <img src="/logo.png" alt="ShopSimples" className="w-48 opacity-50" />
                     </div>
                     <div>
                         <h2 className="text-xl text-white mb-3">Insitucional</h2>
