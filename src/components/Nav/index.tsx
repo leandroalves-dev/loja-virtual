@@ -22,7 +22,7 @@ const Nav = () => {
         <nav> 
             <ul className="grid grid-cols-5 gap-2 text-center text-white max-md:hidden">
                 {navItems.map(({ label, to }) => (
-                    <li key={to} className={`py-2 border cursor-pointer border-neutral-950/60 rounded transition ${pathname === to ? "bg-pink-900 text-white" : "bg-neutral-950/20 hover:bg-pink-900 hover:text-white"}`}>
+                    <li key={to} className={`py-2 border cursor-pointer border-neutral-950/60 transition ${pathname === to ? "bg-pink-900 text-white" : "bg-neutral-950/20 hover:bg-pink-900 hover:text-white"}`}>
                         <Link to={to} className="block w-full h-full">{label}</Link>
                     </li>
                 ))}
