@@ -26,6 +26,7 @@ import Checkout from './components/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 import OrderHistory from './pages/OrderHistory';
 
+
 function App() {
     return (
         <BrowserRouter>
@@ -56,6 +57,7 @@ function App() {
                                         <Route path="/my-orders" element={<PrivateRoute><OrderHistory /></PrivateRoute>} />
                                     </Routes>
                                 </main>
+                                
                                 <Footer />
                             
                         </div>
