@@ -16,7 +16,7 @@ interface AuthContextType {
     userData: UserData | null;
     setUserData: (data: UserData | null) => void;
     loading: boolean;
-    logout: () => void;
+    logout: () => void; 
     setUser: (user: User | null) => void;
 }
 

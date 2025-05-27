@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 //components
 import Container from "../../components/Container"
+import ImageProducts from "../../components/ImageProducts/ImageProducts";
 
 const OrderSuccess = () => {
 
@@ -25,11 +26,11 @@ const OrderSuccess = () => {
                 <p className="text-md text-green-700">Obrigado pela sua compra, {order.name}!</p>
                 <div className="mt-4 text-left">
                 <h2 className="mb-2 text-lg text-white">Resumo do Pedido:</h2>
-                <ul className="list-disc text-md text-white/70">
+                <ul className="list-disc text-md text-white/70 grid grid-cols-2 max-md:grid-cols-1">
                     {order.items.map((item: any) => (
                         <li key={item.id} className="flex gap-5 mb-3">
-                            <div className="w-32 p-1 bg-pink-800">
-                                <img src={item.imagem} alt={item.title} />
+                            <div className="w-36">
+                                <ImageProducts src={item.imagem} alt={item.title} className="max-h-[150px]" />
                             </div>
                             <div className="flex flex-col">
                                 <h2 className="text-white text-lg mb-2">{item.title}</h2>

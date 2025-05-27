@@ -49,7 +49,7 @@ const Nav = () => {
                 <div className="mt-3 px-3">
                     <ul className="grid grid-rows-5 gap-1 text-white" onClick={() => setMenuOpen(false)}>
                         {navItems.map(({ label, to }) => (
-                            <li key={to} className={`py-2 cursor-pointer transition ${pathname === to ? "text-pink-900" : "hover:text-pink-900"}`}>
+                            <li key={to} className={`py-1 cursor-pointer transition ${pathname === to ? "text-pink-900" : "hover:text-pink-900"}`}>
                                 <Link to={to} className="block w-full h-full">{label}</Link>
                             </li>
                         ))}

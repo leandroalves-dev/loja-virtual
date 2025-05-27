@@ -9,6 +9,7 @@ import { renderStars } from "../../utils/renderStars"
 import Loading from "../../components/Loading"
 import Container from "../../components/Container"
 import Breadcrumbs from "../../components/Breadcrumbs"
+import ImageProducts from "../../components/ImageProducts/ImageProducts"
 
 const Category = () => {
 
@@ -33,7 +34,7 @@ const Category = () => {
                     {categoryFilter.map(category => (
                         <div key={category.id}>
                             <Link to={`/product/${category.id}`}>
-                                <img src={category.imagem} alt={category.title} className="bg-neutral-700 p-0.5" />
+                                <ImageProducts src={category.imagem} alt={category.title} />
                             </Link>
                             <h2 className="text-white mt-2">{category.title}</h2>
                             <div className="flex items-center justify-between mt-2">

@@ -6,6 +6,7 @@ import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 //utils
 import { renderStars } from "../../utils/renderStars";
+import ImageProducts from "../../components/ImageProducts/ImageProducts";
 
 const Sale = () => {
     
@@ -24,7 +25,7 @@ const Sale = () => {
                         return (
                             <div key={product.id} className="relative">
                                 <Link to={`/product/${product.id}`}>
-                                    <img src={product.imagem} alt={product.title} className="bg-neutral-700 p-0.5" />
+                                    <ImageProducts src={product.imagem} alt={product.title} />
                                 </Link>
                                 <h2 className="text-white mt-2">{product.title}</h2>
                                 <div className="flex items-center justify-between mt-2">

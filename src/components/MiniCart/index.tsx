@@ -6,6 +6,7 @@ import Quantity from "../Quantity";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import ImageProducts from "../ImageProducts/ImageProducts";
 
 
 const Minicart = () => {
@@ -38,14 +39,13 @@ const Minicart = () => {
                         ) : (
                             cart.map(item => (
                                 <div key={item.id} className="p-4 flex justify-between border-b-1 border-b-neutral-800/60">
-
                                     <div className="flex gap-2">
-                                        <div className="bg-neutral-800 p-2 text-white w-20 flex justify-center items-center">
-                                            <img src={item.imagem} alt={item.title} />
+                                        <div className="text-white w-28">
+                                            <ImageProducts src={item.imagem} alt={item.title} className="max-h-[90px]" />
                                         </div>
                                         <div className="text-white">
-                                            <h2 className="mb-1 text-sm">{item.title}</h2>
-                                            <p className="text-[10px]">R$ {item.price}</p>
+                                            <h2 className="mb-2 text-sm font-medium">{item.title}</h2>
+                                            <p className="text-[12px]">R$ {item.price}</p>
                                             <Quantity 
                                                 quantity={item.quantity} 
                                                 onIncrease={() => increaseQuantity(item.id)} 

@@ -21,9 +21,11 @@ const Welcome = () => {
         <Container>
             <div className="flex items-center justify-end max-md:justify-start max-md:mt-1"> 
                 {user && userData ? (
-                    <ul className="flex items-center gap-3 max-md:flex-col max-md:gap-1">
-                        <li><img src={userData.imagem || defaultImage} className="w-7 rounded-full" /></li>
-                        <li className="max-md:pr-15">{userData.name ?? 'usuário'}, seja bem-vindo!</li>
+                    <ul className="flex items-center gap-3 max-md:flex-col max-md:gap-2 max-md:items-start">
+                        <li className="flex gap-3 items-center">
+                            <img src={userData.imagem || defaultImage} className="w-7 rounded-full" />
+                            {userData.name ?? 'usuário'}, seja bem-vindo!
+                        </li>
                         <li className="text-white/30 max-md:hidden">|</li>
                         <li><Link to='/edit-profile'>Perfil</Link></li>
                         <li className="text-white/30 max-md:hidden">|</li>

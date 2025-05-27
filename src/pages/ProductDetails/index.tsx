@@ -20,10 +20,11 @@ import Cep from "../../components/Cep";
 import Comments from "../../components/Comments";
 //context
 import { useFavorites } from "../../context/FavoritesContext";
-import { renderStars } from "../../utils/renderStars";
+import { useCart } from "../../context/CartContext";
 //interface
 import type { ListComments } from "../../interface";
-import { useCart } from "../../context/CartContext";
+//utils
+import { renderStars } from "../../utils/renderStars";
 
 const ProductDetails = () => {
 
@@ -99,6 +100,9 @@ const ProductDetails = () => {
     if(!product) return <p className="text-white">Produto não encontrado!</p>
 
     console.log('QUANTITY', quantity)
+    console.log('PRODUCT', product)
+
+    const precoComDesconto = product.sale ? (product.price - (product.price * product.discount / 100)).toFixed(2) : product.price.toFixed(2);
 
     return (
         <Container>
@@ -110,7 +114,7 @@ const ProductDetails = () => {
                 <div className=" w-1/2 self-start max-md:w-full">
                     <div className="bg-neutral-950/20 p-4 mb-4">
                         <div className="flex justify-between items-center">
-                            <h1 className="text-white text-2xl">{product.title}</h1>
+                            <h1 className="text-white text-2xl">{product.title}</h1>                            
                             <div className="cursor-pointer" onClick={handleFavorite}>
                                 {isFavorite(product.id) ? (
                                     <BsHeartFill color="red" />
@@ -118,12 +122,20 @@ const ProductDetails = () => {
                                     <BsHeart color="#FFF" />
                                 )}
                             </div>
-                        </div>
-
-                        <div className="flex gap-1 text-white text-sm cursor-pointer hover:underline" onClick={scrollToComments}>
+                        </div>                        
+                        <div className="inline-flex gap-1 text-white text-sm cursor-pointer hover:underline" onClick={scrollToComments}>
                             {renderStars(Math.round(rating))} ({comments.length})
                         </div>
-
+                        <div className="mt-3 flex flex-col">
+                            {product.sale && (
+                                <span className="text-neutral-700 text-sm line-through">
+                                R$ {product.price.toFixed(2)}
+                                </span>
+                            )}
+                            <span className="text-lg text-white">
+                                R$ {precoComDesconto}
+                            </span>
+                        </div>
                         <div className="my-4">
                             <h3 className="text-white mb-1">Descrição do produto</h3>
                             <p className="text-neutral-700 text-sm">{product.description}</p>

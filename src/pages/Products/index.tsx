@@ -5,6 +5,7 @@ import { useFetchProducts } from "../../hooks/useFetchProducts"
 import { renderStars } from "../../utils/renderStars"
 import Pagination from "../../components/Pagination"
 import { useState } from "react"
+import ImageProducts from "../../components/ImageProducts/ImageProducts"
 
 const Products = () => {
 
@@ -23,8 +24,8 @@ const Products = () => {
                 <div className="grid grid-cols-4 gap-3 max-md:grid-cols-3 max-sm:grid-cols-2">
                     {paginatedData.map(product => (
                         <div key={product.id}>
-                        <Link to={`/product/${product.id}`}>
-                            <img src={product.imagem} alt={product.title} className="bg-neutral-700 p-0.5" />
+                        <Link to={`/product/${product.id}`} className="max-md:w-72">
+                            <ImageProducts src={product.imagem} alt={product.title} />
                         </Link>
                         <h2 className="text-white mt-2">{product.title}</h2>
                             <div className="flex items-center justify-between mt-2">

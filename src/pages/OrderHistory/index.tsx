@@ -12,6 +12,7 @@ import Container from "../../components/Container";
 import type { Order } from "../../interface";
 import Pagination from "../../components/Pagination";
 import Loading from "../../components/Loading";
+import ImageProducts from "../../components/ImageProducts/ImageProducts";
 
 const OrderHistory = () => {
     const { user } = useAuth();
@@ -64,11 +65,11 @@ const OrderHistory = () => {
                             <p className="text-sm mb-2 text-white/60">
                                 Pedido feito em: <span className="text-pink-600">{order.createdAt?.toDate().toLocaleDateString()}</span>
                             </p>
-                            <ul className="list-none grid grid-cols-3 gap-4">
+                            <ul className="list-none grid grid-cols-2 max-md:grid-cols-1 gap-4">
                                 {order.items.map(item => (
                                 <li key={item.id} className="flex gap-5 mb-4">
-                                    <div className="w-28 p-1 border-2 border-pink-800">
-                                        <img src={item.imagem} alt={item.title} className="w-28 h-full" />
+                                    <div className="w-36">
+                                        <ImageProducts src={item.imagem} alt={item.title} className="max-h-[150px]" />
                                     </div>
                                     <div className="flex flex-col">
                                         <h2 className="text-white text-lg mb-1">{item.title}</h2>

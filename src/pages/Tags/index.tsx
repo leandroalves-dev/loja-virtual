@@ -9,6 +9,7 @@ import { renderStars } from "../../utils/renderStars"
 import Loading from "../../components/Loading"
 import Container from "../../components/Container"
 import Breadcrumbs from "../../components/Breadcrumbs"
+import ImageProducts from "../../components/ImageProducts/ImageProducts"
 
 const Tags = () => {
 
@@ -41,7 +42,7 @@ const Tags = () => {
                 <div className="grid grid-cols-4 gap-3 max-sm:grid-cols-2 max-md:grid-cols-3">
                     {tagFilter.map(product => (
                         <Link to={`/product/${product.id}`} key={product.id} className="bg-neutral-900">
-                            <img src={product.imagem} alt={product.title} className="h-48 w-full object-cover" />
+                            <ImageProducts src={product.imagem} alt={product.title} />
                             <h3 className="text-white mt-2">{product.title}</h3>
                             <span className="text-neutral-700">R$ {product.price}</span>
                             <span className="text-yellow-400 text-sm flex gap-1">{renderStars(product.rating)}</span>
