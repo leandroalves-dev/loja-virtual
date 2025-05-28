@@ -1,4 +1,5 @@
 
+import Benefits from "../../components/Benefits"
 import CategoryList from "../../components/CategoryList"
 import Container from "../../components/Container"
 import FeedbacksClients from "../../components/FeedbacksClients"
@@ -11,6 +12,7 @@ const Home = () => {
         <>
             <SlideHome />
             <Container>
+                <Benefits />
                 <CategoryList />
                 <ProductList />                
                 <SaleHome />

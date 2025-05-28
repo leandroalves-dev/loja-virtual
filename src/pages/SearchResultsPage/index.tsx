@@ -16,7 +16,7 @@ const SearchResultsPage = () => {
 
     useEffect(() => {
         const results = products.filter(product =>
-            product.title?.toLowerCase().includes(searchTerm)
+            product.description?.toLowerCase().includes(searchTerm)
         )
         setFilteredProducts(results)
     }, [products, searchTerm])
