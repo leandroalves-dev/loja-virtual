@@ -26,6 +26,7 @@ import Checkout from './components/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 import OrderHistory from './pages/OrderHistory';
 import ScrollToTop from './components/ScrollToTop';
+import SearchResultsPage from './pages/SearchResultsPage';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                                     <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
                                     <Route path="/order-success" element={<PrivateRoute><OrderSuccess /></PrivateRoute>} />
                                     <Route path="/my-orders" element={<PrivateRoute><OrderHistory /></PrivateRoute>} />
+                                    <Route path="/search" element={<SearchResultsPage />} />
                                 </Routes>
                             </main>
                             <Footer />

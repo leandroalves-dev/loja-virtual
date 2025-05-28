@@ -25,8 +25,6 @@ const FeedbacksClients = () => {
         return () => getComments()
     },[])
 
-    console.log('TODOS OS COMENTÁRIO:', comments)
-
     if (comments.length === 0) {
         return null; 
     }

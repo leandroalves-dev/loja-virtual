@@ -35,7 +35,7 @@ const SaleHome = () => {
                             </span>
                         </div>
                         <div className="flex flex-col basis-3/5 justify-center bg-neutral-800/10">
-                            <div className={`flex flex-col px-10 ${ index % 2 === 0 ? 'max-md:px-0': ''} max-md:my-8`}>
+                            <div className={`flex flex-col px-10 max-md:my-8 max-md:px-0`}>
                                 <h2 className="text-3xl text-white mb-3">{product.title}</h2>
                                 <p className="text-white">{product.description}</p>
                                 <div className="mt-4 flex flex-col">

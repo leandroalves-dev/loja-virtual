@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 //components
 import Container from "../Container"
-import Search from "../Search"
+
 import Nav from "../Nav"
 import Welcome from "../Welcome"
 import IconFavCart from "../IconFavCart"
+import FormSearch from "../FormSearch"
 
 const Header = () => {
 
@@ -24,7 +25,7 @@ const Header = () => {
                                 <IconFavCart />
                             </div>
                         </div>
-                        <Search />
+                        <FormSearch />
                         <div className="flex gap-3 max-md:hidden">
                             <IconFavCart />
                         </div>

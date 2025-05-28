@@ -83,7 +83,7 @@ const Footer = () => {
                     </div>
                 </div>
             </Container>
-            <div className="bg-neutral-900 py-12">
+            <div className="bg-neutral-900/80 py-12">
                 <Container>
                     <div className="flex justify-between max-md:flex-col max-md:gap-5">
                         <div>
