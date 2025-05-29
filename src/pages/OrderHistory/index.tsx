@@ -8,11 +8,11 @@ import { db } from "../../config/firebaseConfig";
 import { useAuth } from "../../context/AuthContext";
 //container
 import Container from "../../components/Container";
-//interface
-import type { Order } from "../../interface";
 import Pagination from "../../components/Pagination";
 import Loading from "../../components/Loading";
 import ImageProducts from "../../components/ImageProducts/ImageProducts";
+//interface
+import type { Order } from "../../interface";
 
 const OrderHistory = () => {
     const { user } = useAuth();
@@ -49,6 +49,8 @@ const OrderHistory = () => {
 
         fetchOrders();
     }, [user]);
+
+    console.log('IMAGENS', orders)
 
     return (
         <Container>

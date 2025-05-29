@@ -42,7 +42,7 @@ const Nav = () => {
                    <BsX size={30} />
                 </button>  
 
-                <div className="py-2 bg-pink-900 text-white text-sm">
+                <div className="py-2 bg-pink-900 text-white text-sm" onClick={() => setMenuOpen(false)}>
                     <Welcome />         
                 </div>                
                 

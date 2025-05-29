@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
+//icons
+import { BsBookmarkFill } from "react-icons/bs";
 //hooks
 import { useFetchProducts } from "../../hooks/useFetchProducts"
 //components
 import Loading from "../Loading";
-import { BsBookmarkFill } from "react-icons/bs";
-
-
 
 const CategoryList = () => {  
     const { products, loading } = useFetchProducts()

@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { renderStars } from "../../utils/renderStars";
-import Loading from "../Loading";
-import { useFetchProducts } from "../../hooks/useFetchProducts";
-import ImageProducts from "../ImageProducts/ImageProducts";
+//icons
 import { BsBookmarkFill } from "react-icons/bs";
+//utils
+import { renderStars } from "../../utils/renderStars";
+//components
+import ImageProducts from "../ImageProducts/ImageProducts";
+import Loading from "../Loading";
+//hooks
+import { useFetchProducts } from "../../hooks/useFetchProducts";
 
 const ProductList = () => {
 

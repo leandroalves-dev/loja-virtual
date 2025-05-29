@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom"
+import { useEffect } from "react"
 //icons
 import { BsPersonFill, BsPersonFillLock } from "react-icons/bs"
+import { FiLogOut } from "react-icons/fi"
 //components
 import Container from "../Container"
+//context
 import { useAuth } from "../../context/AuthContext"
-import { FiLogOut } from "react-icons/fi"
-import { useEffect } from "react"
 
 const Welcome = () => {
 

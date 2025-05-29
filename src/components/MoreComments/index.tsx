@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../../config/firebaseConfig";
+//icons
+import { BsBookmarkFill } from "react-icons/bs";
+//axios
 import Api from "../../api/axios";
+//firebase
+import { collection, onSnapshot } from "firebase/firestore";
+//config
+import { db } from "../../config/firebaseConfig";
+//interface
 import type { Products } from "../../interface";
 import type { ListComments } from "../../interface";
-import { Link } from "react-router-dom";
-import { BsBookmarkFill } from "react-icons/bs";
-
 
 const ProdutosComentados = () => {
     const [products, setProducts] = useState<Products[]>([]);
@@ -42,7 +46,7 @@ const ProdutosComentados = () => {
         fetchData();
     }, []);
 
-    console.log('commentedProducts', commentedProducts)
+    console.log('Mais comentados', products)
 
     return (
         <>

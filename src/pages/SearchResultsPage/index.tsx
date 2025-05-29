@@ -1,10 +1,14 @@
 import { Link, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
+//icons
+import { BsSignpost2Fill } from "react-icons/bs"
+//hooks
 import { useFetchProducts } from "../../hooks/useFetchProducts"
+//interface
 import type { Products } from "../../interface"
+//components
 import Loading from "../../components/Loading"
 import Container from "../../components/Container"
-import { BsSignpost2Fill } from "react-icons/bs"
 
 const SearchResultsPage = () => {
     const location = useLocation()

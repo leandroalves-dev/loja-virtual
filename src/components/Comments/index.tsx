@@ -104,8 +104,8 @@ const Comments = ({ productId }: { productId: number }) => {
                             )}
                         </div>
                         <div className="flex items-start gap-2 text-white">
-                            <div className="w-16 h-16 flex justify-center items-center">
-                                <img src={comment.imagem || defaultImage} />
+                            <div className="w-20 aspect-[3/4] overflow-hidden shrink-0 rounded-md flex justify-center items-center">
+                                <img src={comment.imagem || defaultImage} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex flex-col text-sm">
                                 <div className="flex items-center gap-2 mb-2">

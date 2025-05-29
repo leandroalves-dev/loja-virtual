@@ -1,20 +1,22 @@
-//firebase
-
-//components
-import { useEffect, useState } from "react"
-import Container from "../../components/Container"
-import { doc, getDoc, updateDoc } from "firebase/firestore"
-import { db } from "../../config/firebaseConfig"
-import { useAuth } from "../../context/AuthContext"
-
-import type { Cep } from "../../interface"
 import { useForm } from "react-hook-form"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+//firebase
+import { doc, getDoc, updateDoc } from "firebase/firestore"
+//config
+import { db } from "../../config/firebaseConfig"
+//components
+import Container from "../../components/Container"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 import Loading from "../../components/Loading"
 import MessageSuccess from "../../components/MessageSuccess"
+//context
+import { useAuth } from "../../context/AuthContext"
+//interface
+import type { Cep } from "../../interface"
+//hooks
 import { useAutoClearMessage } from "../../hooks/useAutoClearMessage"
-import { useNavigate } from "react-router-dom"
 
 const EditProfile = () => {
 

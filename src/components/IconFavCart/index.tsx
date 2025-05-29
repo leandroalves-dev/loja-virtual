@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom"
 // icons
 import { BsCart2, BsHeart } from "react-icons/bs"
 // components
 import Minicart from "../MiniCart"
-import { Link } from "react-router-dom"
+//context
 import { useCart } from "../../context/CartContext"
 
 const IconFavCart = () => {

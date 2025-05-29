@@ -1,5 +1,6 @@
-import { BsChevronRight, BsHouseFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+//icons
+import { BsChevronRight, BsHouseFill } from "react-icons/bs";
 
 interface BreadcrumbItem {
     label: string;

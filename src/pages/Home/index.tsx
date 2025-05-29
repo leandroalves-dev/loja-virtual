@@ -1,4 +1,4 @@
-
+//components
 import Benefits from "../../components/Benefits"
 import CategoryList from "../../components/CategoryList"
 import Container from "../../components/Container"

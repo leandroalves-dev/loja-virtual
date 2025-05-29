@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 //components
 import Container from "../Container"
-
 import Nav from "../Nav"
 import Welcome from "../Welcome"
 import IconFavCart from "../IconFavCart"

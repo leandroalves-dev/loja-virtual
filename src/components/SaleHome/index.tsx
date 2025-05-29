@@ -1,8 +1,11 @@
-import { useMemo } from "react";
-import { useFetchProducts } from "../../hooks/useFetchProducts";
-import Loading from "../Loading";
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
+//icons
 import { BsBookmarkFill } from "react-icons/bs";
+//hooks
+import { useFetchProducts } from "../../hooks/useFetchProducts";
+//components
+import Loading from "../Loading";
 
 const SaleHome = () => {
 

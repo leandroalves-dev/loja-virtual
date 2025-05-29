@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import Container from "../../components/Container";
+//context
 import { useFavorites } from "../../context/FavoritesContext";
+//components
+import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import ImageProducts from "../../components/ImageProducts/ImageProducts";
 

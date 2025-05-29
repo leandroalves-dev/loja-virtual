@@ -1,20 +1,23 @@
+import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { useAuth } from "../../context/AuthContext"
-
-import type { Cep } from "../../interface"
-
-
-import Container from "../Container"
+//firebase
 import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore"
+//config
 import { db } from "../../config/firebaseConfig"
+//context
+import { useAuth } from "../../context/AuthContext"
+import { useCart } from "../../context/CartContext"
+//interface
+import type { Cep } from "../../interface"
+//components
+import Container from "../Container"
+import MessageSuccess from "../MessageSuccess"
 import Loading from "../Loading"
 import Input from "../Input"
 import Button from "../Button"
-import { useCart } from "../../context/CartContext"
-import { useNavigate } from "react-router-dom"
+//hooks
 import { useAutoClearMessage } from "../../hooks/useAutoClearMessage"
-import MessageSuccess from "../MessageSuccess"
 
 const Checkout = () => {
 

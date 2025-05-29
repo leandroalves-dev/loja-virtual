@@ -1,11 +1,14 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
+//components
 import Container from "../../components/Container"
 import Loading from "../../components/Loading"
-import { useFetchProducts } from "../../hooks/useFetchProducts"
-import { renderStars } from "../../utils/renderStars"
 import Pagination from "../../components/Pagination"
-import { useState } from "react"
 import ImageProducts from "../../components/ImageProducts/ImageProducts"
+//hooks
+import { useFetchProducts } from "../../hooks/useFetchProducts"
+//utils
+import { renderStars } from "../../utils/renderStars"
 
 const Products = () => {
 

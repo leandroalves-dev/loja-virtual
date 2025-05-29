@@ -1,43 +1,42 @@
 // src/context/NOME_DO_CONTEXTO.tsx
-import { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 // 1. Tipo do que será armazenado no context
 type Item = {
-  id: number;
-  // ... outros campos
+    id: number;
 };
 
 type NomeContextoType = {
-  items: Item[];
-  addItem: (item: Item) => void;
-  removeItem: (id: number) => void;
-  hasItem: (id: number) => boolean;
+    items: Item[];
+    addItem: (item: Item) => void;
+    removeItem: (id: number) => void;
+    hasItem: (id: number) => boolean;
 };
 
 // 2. Criação do contexto
 const NomeContexto = createContext<NomeContextoType | undefined>(undefined);
 
 // 3. Criação do provider
-export const NomeProvider = ({ children }: { children: ReactNode }) => {
-  const [items, setItems] = useState<Item[]>([]);
+export const NomeProvider = ({ children }: { children: React.ReactNode }) => {
+    const [items, setItems] = useState<Item[]>([]);
 
-  const addItem = (item: Item) => {
-    setItems(prev => [...prev, item]);
-  };
+    const addItem = (item: Item) => {
+        setItems(prev => [...prev, item]);
+    };
 
-  const removeItem = (id: number) => {
-    setItems(prev => prev.filter(item => item.id !== id));
-  };
+    const removeItem = (id: number) => {
+        setItems(prev => prev.filter(item => item.id !== id));
+    };
 
-  const hasItem = (id: number) => {
-    return items.some(item => item.id === id);
-  };
+    const hasItem = (id: number) => {
+        return items.some(item => item.id === id);
+    };
 
-  return (
-    <NomeContexto.Provider value={{ items, addItem, removeItem, hasItem }}>
-      {children}
-    </NomeContexto.Provider>
-  );
+    return (
+        <NomeContexto.Provider value={{ items, addItem, removeItem, hasItem }}>
+        {children}
+        </NomeContexto.Provider>
+    );
 };
 
 // 4. Hook personalizado para usar o contexto

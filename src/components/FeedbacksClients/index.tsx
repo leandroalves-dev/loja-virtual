@@ -1,11 +1,16 @@
+import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import sliderSettings from "../../utils/sliderSettings";
-import Container from '../Container';
-import { useEffect, useState } from 'react';
-import { collection, onSnapshot, query } from 'firebase/firestore';
-import { db } from '../../config/firebaseConfig';
-import type { ListComments } from '../../interface';
+//icons
 import { BsChatLeftQuote, BsStar, BsStarFill } from 'react-icons/bs';
+//firebase
+import { collection, onSnapshot, query } from 'firebase/firestore';
+//config
+import { db } from '../../config/firebaseConfig';
+//components
+import Container from '../Container';
+//interface
+import type { ListComments } from '../../interface';
 
 const FeedbacksClients = () => {
 

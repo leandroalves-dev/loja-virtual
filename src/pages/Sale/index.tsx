@@ -4,9 +4,9 @@ import { useFetchProducts } from "../../hooks/useFetchProducts"
 //components
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
+import ImageProducts from "../../components/ImageProducts/ImageProducts";
 //utils
 import { renderStars } from "../../utils/renderStars";
-import ImageProducts from "../../components/ImageProducts/ImageProducts";
 
 const Sale = () => {
     

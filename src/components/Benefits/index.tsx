@@ -1,3 +1,4 @@
+//icons
 import { BsCreditCard2Back } from "react-icons/bs"
 import { FaTruck } from "react-icons/fa"
 import { FaUserGroup } from "react-icons/fa6"

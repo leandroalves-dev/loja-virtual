@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
-import { useAuth } from "./AuthContext"; // deve fornecer `user`
+import { useAuth } from "./AuthContext"; 
 
 type Favorite = {
   id: number;

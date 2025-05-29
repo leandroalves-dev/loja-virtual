@@ -43,6 +43,8 @@ export const CartProvider = ({children}:{children: React.ReactNode}) => {
         console.log('Cart atualizado:', cart);
         if (cart.length > 0) {
             localStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+            localStorage.removeItem('cart');
         }
 
     },[cart])
