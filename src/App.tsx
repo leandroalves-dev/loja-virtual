@@ -31,7 +31,7 @@ import SearchResultsPage from './pages/SearchResultsPage';
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter  basename='/projects/loja_virtual/'>
             <AuthProvider>
                 <CartProvider>
                     <FavoritesProvider>
