@@ -18,7 +18,7 @@ O processo de compra é apenas simulado. O projeto não possui integração com 
 -  React Slick para sliders
 -  ViaCEP API para cálculo de entrega por CEP
 
-**Funcionalidades principais:
+## Funcionalidades principais:
 
  -  Busca inteligente de produtos por nome.
  -  Listagem de produtos organizados por categorias e tags.
