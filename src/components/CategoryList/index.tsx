@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useFetchProducts } from "../../hooks/useFetchProducts"
 //components
 import Loading from "../Loading";
+import { BsBookmarkFill } from "react-icons/bs";
 
 
 
@@ -13,7 +14,7 @@ const CategoryList = () => {
     return (
         <div className="mt-10">
             {loading && <Loading />}           
-            <h2 className="text-white mb-6 text-2xl">Categorias de Produtos</h2>
+            <h2 className="text-white mb-6 text-2xl flex items-center gap-2"><BsBookmarkFill /> Categorias de Produtos</h2>
             <div className="grid grid-cols-4 gap-3 max-md:grid-cols-2 max-sm:grid-cols-2">
                 {categoriasUnicas.map((category, index) => (
                     <Link to={`/category/${category}`} key={index} className="mb-6 bg-pink-800 p-1 capitalize text-white text-2xl min-h-[400px] max-lg:min-h-[250px] flex items-center justify-center hover:opacity-60 transition ease-in-out delay-100">

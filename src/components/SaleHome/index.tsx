@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useFetchProducts } from "../../hooks/useFetchProducts";
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
+import { BsBookmarkFill } from "react-icons/bs";
 
 const SaleHome = () => {
 
@@ -22,7 +23,7 @@ const SaleHome = () => {
     return (
         <div className="mb-10 mt-6 border-t border-b border-neutral-800 py-8">
             {loading && <Loading />}
-            <h2 className="text-white mb-6 text-2xl">Produto em oferta</h2>
+            <h2 className="text-white mb-6 text-2xl flex items-center gap-2"><BsBookmarkFill /> Produto em oferta</h2>
             {selectedSales.map((product, index) => {
                 const precoComDesconto = (product.price - (product.price * product.discount / 100)).toFixed(2);
 

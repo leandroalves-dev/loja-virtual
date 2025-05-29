@@ -3,6 +3,7 @@ import { renderStars } from "../../utils/renderStars";
 import Loading from "../Loading";
 import { useFetchProducts } from "../../hooks/useFetchProducts";
 import ImageProducts from "../ImageProducts/ImageProducts";
+import { BsBookmarkFill } from "react-icons/bs";
 
 const ProductList = () => {
 
@@ -13,7 +14,7 @@ const ProductList = () => {
     return (
         <div>
             {loading && <Loading />}
-            <h2 className="text-white mb-6 text-2xl">Produtos em Destaques</h2>
+            <h2 className="text-white mb-6 text-2xl flex items-center gap-2"><BsBookmarkFill /> Produtos em Destaques</h2>
             <div className="grid grid-cols-4 gap-3 max-md:grid-cols-3 max-sm:grid-cols-2">
                 {productsOffSale.map(product => (
                     <div key={product.id} className="mb-8">
